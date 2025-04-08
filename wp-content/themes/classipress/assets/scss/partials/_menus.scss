@@ -1,0 +1,174 @@
+
+/* Menus
+----------------------------------------------- */
+
+
+.top-bar ul {
+	background: transparent;
+	z-index: 999;
+	font-size: 0.9125rem;
+}
+
+.top-bar ul.submenu {
+	background: $white;
+}
+
+.top-bar li.menu-item {
+	a {
+		color: $suva-grey;
+	}
+	a:focus,
+	a:hover {
+		color: $matterhorn;
+		text-decoration: none;
+	}
+	.has-bg-color,
+	.has-image {
+		a,
+		a:hover,
+		a:focus {
+			color: #FFF;
+		}
+	}
+}
+
+.is-dropdown-submenu {
+	border: medium none;
+	border-radius: 3px;
+	box-shadow: 0 0 3px rgba(86, 96, 117, 0.5);
+}
+
+.is-dropdown-submenu .divider {
+	height: 1px;
+	margin: 0;
+	overflow: hidden;
+	background-color: $whisper;
+}
+
+li#menu-item-username > a {
+	@include breakpoint(medium) {
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+}
+
+.dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+	content: '\f107';
+	font-family: FontAwesome;
+	border: 0;
+	margin-top: -6px;
+	right: 17px;
+}
+
+
+/* Dropdown Categories List */
+
+.listing-cats {
+	@include breakpoint(small only) {
+		margin-left: 0;
+	}
+}
+
+.listing-cats .cat-column {
+	@include breakpoint(medium) {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
+}
+
+.listing-cats a {
+	display: block;
+	line-height: 1;
+	padding: 0.7rem 1rem;
+	color: $matterhorn;
+
+	@include breakpoint(medium and m-large only) {
+		font-size: 80%;
+	}
+}
+
+.listing-cats .parent-cat a {
+	font-weight: bold;
+}
+
+.listing-cats .sub-cat-list {
+	padding-left: 0.5rem;
+	margin-top: -0.4rem;
+}
+
+.listing-cats .sub-cat-list a {
+	color: $suva-grey;
+}
+
+.menu.dropdown .listing-cats-dropdown {
+	position: absolute!important;
+}
+
+.listing-cats-dropdown {
+	@include breakpoint(medium) {
+		min-width: 800px;
+	}
+}
+
+.listing-cats .cat-item-count {
+	background-color: $white-smoke;
+	color: #777;
+	margin-left: 5px;
+	float: right;
+}
+
+.listing-cats-dropdown .cat-item-count {
+	padding: 0.22222rem 0.44444rem;
+	font-size: 0.61111rem;
+}
+
+.parent-cat-wrap {
+	position: relative;
+
+	.parent-cat,
+	.sub-cat-list {
+		position: relative;
+	}
+
+	&.has-image:before {
+		content: ' ';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba( 0, 0, 0, 0.35 );
+	}
+
+	&.has-bg-color,
+	&.has-image {
+		a,
+		a:hover,
+		a:focus {
+			color: #FFF;
+		}
+	}
+}
+
+/* Header XY Grid for browsers which support it
+----------------------------------------------- */
+.listing-cats {
+	.parent-cat > .cat-item-link {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.cat-item-name {
+			width: 100%;
+		}
+		.category-icon {
+			max-width: 50px;
+			margin-right: 1rem;
+		}
+	}
+}
+
+/* Font Awesome overrides for Foundation */
+.menu > li > a i.fa {
+	vertical-align: inherit;
+	margin-right: 0.5rem;
+}

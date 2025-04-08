@@ -1,0 +1,265 @@
+
+/* Header
+----------------------------------------------- */
+
+/* Prevent sticky bar from hiding behind wp-admin bar */
+body.admin-bar .header .sticky.is-stuck {
+	top: 32px!important;
+
+	@media screen and (max-width: 782px) {
+		top: 46px!important;
+	}
+}
+
+.header #sticky_header {
+	width: 100%;
+	z-index: 9999;
+
+	.top-bar {
+		transition: background-color 0.25s ease-out, color 0.25s ease-out;
+	}
+}
+
+.header #top-bar-primary {
+	border-bottom: 1px solid $whisper;
+	background: $white;
+}
+
+.header #first-top-bar {
+	background-color: $white;
+	font-size: 1rem;
+	padding: 0;
+
+	nav > ul > li > a {
+		color: $matterhorn;
+		&:hover,
+		&:focus,
+		&:active {
+			color: #3C3C3C;
+		}
+	}
+}
+
+.header .primary-header-wrap {
+	width: 100%;
+	height: auto;
+}
+
+.header .site-branding {
+	float: left;
+	vertical-align: middle;
+	text-align: left;
+	padding-right: 1rem;
+}
+
+.header .custom-logo-link {
+	display: content;
+	margin-right: 10px;
+
+	img {
+		max-height: 500px;
+		width: auto;
+	}
+}
+
+.header .site-title {
+	margin: 0;
+	clear: none;
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+	font-family: 'Sanchez';
+}
+
+.header .site-description {
+	margin: 0.125em 0 0 0;
+	font-size: 14px;
+}
+
+.header .top-bar-right,
+.header .top-bar-left {
+	vertical-align: middle;
+}
+
+.header .top-bar-right > ul {
+	float: right;
+}
+
+.header ul#menu-header-not-logged-in {
+	background-color: rgba(0, 0, 0, 0);
+}
+
+/* hide so off canvas menus can be used */
+header .sticky-container,
+header .top-bar {
+	@include breakpoint(small only) {
+		display: none;
+	}
+}
+
+#head-nav-wrap.fixed {
+	background-color: #FFF;
+	opacity: 0.95;
+	box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+}
+
+.header .top-bar-right img.avatar {
+	width: 28px;
+	height: 28px;
+	margin-right: 10px;
+}
+
+/* Header XY Grid for browsers which support it
+----------------------------------------------- */
+
+.header {
+	.top-bar-left,
+	.primary-header-wrap {
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+	}
+
+	.primary-header-wrap {
+		justify-content: space-between;
+
+		.top-bar-right,
+		.site-branding,
+		.top-bar-left {
+			flex: 0 0 auto;
+			min-height: 0;
+			min-width: 0;
+			width: 100%;
+		}
+
+		.top-bar-right,
+		.site-branding {
+			width: auto;
+		}
+
+		.top-bar-left {
+			justify-content: space-around;
+
+			@include breakpoint(medium) {
+				order: 2;
+			}
+			@include breakpoint(large) {
+				flex: 1 1 0;
+				width: auto;
+				order: 1;
+			}
+		}
+
+		.top-bar-right {
+			@include breakpoint(medium) {
+				order: 1;
+			}
+			@include breakpoint(large) {
+				order: 2;
+			}
+		}
+	}
+}
+
+/* Custom Header
+----------------------------------------------- */
+
+.has-header-image,
+.has-header-video {
+	.header,
+	.header .top-bar,
+	.header .title-bar {
+		position: relative;
+	}
+	.custom-header {
+		display: block;
+		height: auto;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+	}
+
+	.home-cover {
+		background: none!important;
+		&:after {
+			display: none;
+		}
+	}
+}
+
+.custom-header-media:after {
+	content: ' ';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba( 0, 0, 0, 0.35 );
+}
+
+.has-header-image .custom-header-media img,
+.has-header-video .custom-header-media video,
+.has-header-video .custom-header-media iframe {
+	/*	position: fixed;*/
+	position: absolute;
+	height: auto;
+	left: 50%;
+	max-width: 1000%;
+	min-height: 100%;
+	min-width: 100%;
+	min-width: 100vw; /* vw prevents 1px gap on left that 100% has */
+	width: auto;
+	top: 50%;
+	padding-bottom: 1px; /* Prevent header from extending beyond the footer */
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.wp-custom-header .wp-custom-header-video-button {
+	background-color: rgba(34, 34, 34, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	color: rgba(255, 255, 255, 0.6);
+	height: 45px;
+	overflow: hidden;
+	padding: 0;
+	position: fixed;
+	right: 30px;
+	top: 30px;
+	transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
+	width: 45px;
+	z-index: 10;
+
+	&:hover,
+	&:focus {
+		border-color: rgba(255, 255, 255, 0.8);
+		background-color: rgba(34, 34, 34, 0.8);
+		color: #FFF;
+	}
+}
+
+.admin-bar .wp-custom-header-video-button {
+	top: 62px;
+}
+
+/* For browsers that support 'object-fit' */
+@supports ( object-fit: cover ) {
+	.has-header-image .custom-header-media img,
+	.has-header-video .custom-header-media video {
+		height: 100%;
+		left: 0;
+		object-fit: cover;
+		object-position: 50% 50%;
+		top: 0;
+		transform: none;
+		width: 100%;
+	}
+}
+
+/* Hides div in Customizer preview when header images or videos change. */
+
+body:not(.has-header-image):not(.has-header-video) .custom-header-media {
+	display: none;
+}

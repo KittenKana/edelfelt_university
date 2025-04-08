@@ -1,0 +1,25 @@
+.tabs.content-wrap {
+	margin-bottom: 0;
+}
+
+.sidebar-tabs-content {
+	.tabs-panel {
+		padding: 0;
+	}
+	@include breakpoint(medium) {
+		margin-bottom: 3em;
+	}
+}
+
+.tabs-panel {
+	&.is-active {
+		-webkit-animation: fadeIn 1s;
+		        animation: fadeIn 1s;
+	}
+	.widget-title {
+		display: none;
+	}
+}
+.tabs-title > a {
+	font-size: 1rem;
+}

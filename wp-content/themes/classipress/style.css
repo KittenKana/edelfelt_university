@@ -1,0 +1,22 @@
+/*
+Theme Name: ClassiPress
+Theme URI: https://www.appthemes.com/themes/classipress/
+Author: AppThemes
+Author URI: https://www.appthemes.com/
+Description: A highly customizable premium classified ads theme.
+Version: 4.2.8
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Domain Path: /languages/
+AppThemes ID: classipress
+*/
+
+/**
+ * This file is here to make WordPress happy. Do not modify.
+ *
+ * The actual stylesheets can be found in assets/css but this
+ * theme uses sass so they are compiled from assets/scss.
+ *
+ * If you want custom styles, create a child theme instead.
+ *
+ */

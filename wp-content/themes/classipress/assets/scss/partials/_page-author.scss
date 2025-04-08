@@ -1,0 +1,98 @@
+
+/* Author Page
+----------------------------------------------- */
+
+.author .content-area {
+	margin-top: 1.5em;
+}
+
+.hero-author {
+	padding: 6em 0;
+
+	@include breakpoint(medium) {
+		padding: 8em 0;
+	}
+}
+
+.post-user-profile {
+	position: relative;
+	margin-top: -105px;
+	z-index: 20;
+}
+
+.post-user img {
+	border: 5px solid #FFF;
+	max-width: 150px;
+	max-height: 150px;
+}
+
+.post-user .user-display-name {
+	margin: 0.5rem 0;
+}
+
+.stats-user-profile,
+.author-page .social-icons {
+	text-align: center;
+	margin: 1rem 0 0 0;
+
+	@include breakpoint(medium) {
+		text-align: right;
+		margin: 0 0 2rem 0;
+	}
+}
+
+.stats-user-profile .stat-item {
+	padding-right: 0;
+	border-left: 0;
+	padding-left: 15px;
+	text-align: center;
+}
+
+.stat-item {
+	display: inline-block;
+	padding-right: 15px;
+}
+
+.stats-row-profile .stat-item .value {
+	font-size: 28px;
+	font-weight: 300;
+}
+
+.stat-item .name {
+	margin-bottom: 2px;
+}
+
+.post-user-profile .contacts > li {
+	line-height: 2.2;
+	list-style: none;
+	text-align: left;
+	margin: 0 10px;
+}
+
+.author-listings {
+	margin-top: 1em;
+	margin-bottom: 1em;
+
+	@include breakpoint(medium) {
+		margin-top: 3em;
+		margin-bottom: 3em;
+	}
+
+	article {
+		@include breakpoint(medium) {
+			margin: 0 10px;
+		}
+
+		&.display-list {
+			.content-inner {
+				position: relative;
+			}
+		}
+	}
+
+	.entry-cover.no-image {
+		@include breakpoint(medium) {
+			padding: 8em 0 6em;
+		}
+	}
+}

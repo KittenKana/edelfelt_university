@@ -1,0 +1,11 @@
+$global-text-direction: rtl;
+
+/* Main Site Core
+----------------------------------------------- */
+@import 'style';
+
+
+/* Custom RTL
+----------------------------------------------- */
+@import 'partials/rtl/base';
+

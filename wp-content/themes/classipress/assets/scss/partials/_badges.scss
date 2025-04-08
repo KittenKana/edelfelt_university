@@ -1,0 +1,21 @@
+
+/* Badges
+----------------------------------------------- */
+
+.badge {
+	font-weight: 600;
+}
+
+$badges: (
+	secondary: $secondary-color,
+	info: $info-color,
+	success: $success-color,
+	warning: $warning-color,
+	alert: $alert-color,
+) !default;
+
+@each $badge, $color in $badges {
+	.badge.#{$badge} {
+		background: $color;
+	}
+}

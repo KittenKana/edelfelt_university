@@ -1,0 +1,150 @@
+
+/* Comments
+----------------------------------------------- */
+
+.comments-title,
+.pingbacks-title {
+	margin: 0 0 1em;
+	font-size: 1.5rem;
+}
+
+.comment-list {
+	padding-left: 0;
+}
+
+.comment-list,
+.comment-list .children {
+	list-style: none;
+	margin: 0;
+}
+
+.comment-list .children > li {
+	padding-left: 0.8em;
+
+	@include breakpoint(medium only) {
+		padding-left: 1.2em;
+	}
+
+	@include breakpoint(large) {
+		padding-left: 1.4em;
+	}
+}
+
+.comment-list + .comment-respond,
+.comment-navigation + .comment-respond {
+	padding-top: 1.4em;
+
+	@include breakpoint(large) {
+		padding-top: 1.6em;
+	}
+}
+
+.comment-list article,
+.comment-list .pingback,
+.comment-list .trackback {
+	border-top: 1px solid $whisper;
+	border-top: 1px solid rgba(51, 51, 51, 0.1);
+	padding: 1.5em 0;
+
+	@include breakpoint(large) {
+		padding: 2.5em 0;
+	}
+}
+
+.comment-list + .comment-respond {
+	border-top: 1px solid $whisper;
+}
+
+.comment-content {
+	hyphens: auto;
+	word-wrap: break-word;
+}
+
+.comment-content > :last-child {
+	margin-bottom: 0;
+}
+
+.comment-author .avatar {
+	height: 60px;
+	margin-right: 1.6em;
+	top: 3px;
+	width: 60px;
+	border-radius: 50%;
+	float: left;
+	position: relative;
+}
+
+.comment-meta {
+	position: relative;
+}
+
+.comment-metadata,
+.pingback .edit-link {
+	color: $dark-gray;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.comment-metadata {
+	line-height: 2;
+	margin-bottom: 2.5em;
+}
+
+.comment-metadata a,
+.pingback .edit-link a {
+	color: $dark-gray;
+}
+
+.comment-author {
+	margin-bottom: 0;
+}
+
+.comment-author a {
+	color: $matterhorn;
+}
+
+.comment-author b {
+	vertical-align: middle;
+}
+
+.comment-badge {
+	margin: 0 5px;
+}
+
+.comment-metadata .edit-link:before,
+.pingback .edit-link:before {
+	content: '\002f';
+	display: inline-block;
+	opacity: 0.7;
+	padding: 0 0.538461538em;
+}
+
+.comments-link,
+.edit-link {
+	white-space: nowrap;
+}
+
+.comment-reply-link {
+	margin-top: 20px;
+}
+
+.comment-form,
+.no-comments {
+	padding-top: 1.5em;
+}
+
+.comment-form .form-submit,
+.comment-form .button {
+	margin-bottom: 0;
+}
+
+#comments h3 {
+	font-size: 1.5rem;
+	margin: 0;
+}
+
+.comment-navigation {
+	border-top: 1px solid $whisper;
+	border-bottom: 1px solid $whisper;
+	padding: 2em 0;
+}

@@ -1,0 +1,398 @@
+
+/* Main wp-admin Styles
+----------------------------------------------- */
+
+/* settings page */
+
+[class*='classipress_page'] {
+	code {
+		line-height: 1.9;
+		letter-spacing: 1px;
+	}
+
+	textarea {
+		display: block;
+	}
+
+	.social-ico {
+		vertical-align: text-top;
+		display: inline-block;
+	}
+
+	i {
+		&.feedburnerico:before {
+			content: '\f303';
+			color: #FF7800;
+		}
+
+		&.twitterico:before {
+			content: '\f301';
+			color: #0093BD;
+		}
+
+		&.facebookico:before {
+			content: '\f304';
+			color: #3B5998;
+		}
+
+		&.googleico:before {
+			content: '\f462';
+			color: #F93333;
+		}
+
+		&.sharethisico:before {
+			content: '\f237';
+			color: #4BAA5B;
+		}
+	}
+}
+
+/* admin main styles*/
+
+table.form-table.cp-custom th {
+	position: relative;
+	padding-right: 24px;
+}
+
+.info a {
+	color: #333;
+	text-decoration: none;
+	border-bottom: 1px dotted #333;
+
+	&:hover {
+		color: #666;
+		border-bottom: 1px dotted #666;
+	}
+}
+
+.warning {
+	background: #FFEBE8;
+	border: 1px solid #C00;
+	padding: 10px;
+	color: #333;
+	border-radius: 3px;
+}
+/**/
+
+#boxy {
+	margin: 10px 0;
+}
+
+ul#stats {
+	font-size: 12px;
+}
+/**/
+
+div.stats-info {
+	float: left;
+	width: 45%;
+}
+
+div.stats_overview {
+	float: right;
+	width: 45%;
+	background: none repeat scroll 0 0 #F9F9F9;
+	border: 1px solid #DFDFDF;
+	border-radius: 5px;
+}
+
+.overview_previous,
+.overview_today {
+	float: left;
+	width: 50%;
+}
+
+.stats_overview {
+	p {
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		text-shadow: 0 1px 0 #FFF;
+		text-transform: uppercase;
+
+		&.overview_day {
+			font-size: 12px !important;
+			color: #666;
+			font-weight: bold;
+			margin-top: 6px;
+		}
+
+		&.overview_count {
+			color: #333;
+			font-size: 20px !important;
+			font-weight: bold;
+		}
+
+		&.overview_type,
+		&.overview_type_seek {
+			color: #999;
+			font-size: 9px !important;
+			margin-bottom: 7px;
+
+			em {
+				background: none repeat scroll 0 0 #FFFBE4;
+				border-radius: 3px 3px 3px 3px;
+				padding: 1px 5px 2px;
+			}
+		}
+	}
+
+	h3 {
+		text-align: center;
+		text-shadow: 0 1px 0 #FFF;
+	}
+}
+
+.alt:hover,
+.even:hover {
+	background-color: #EAF2FA !important;
+}
+/* error styles */
+
+input.invalid,
+textarea.invalid,
+select.invalid {
+	background-color: #FFEBE8 !important;
+	border-color: #C00 !important;
+}
+
+label.invalid {
+	float: none;
+	font: bold 12px arial;
+	color: #C00;
+	padding-left: 20px;
+	vertical-align: top;
+}
+
+.updated p,
+.error p {
+	line-height: 1.2em !important;
+}
+/* round out the category div corners */
+
+#form-categorydiv div.tabs-panel {
+	overflow: auto;
+	width: 100%;
+	height: 250px;
+	border: 1px solid #DFDFDF;
+	border-radius: 4px;
+}
+
+ul#categorychecklist {
+	padding: 5px 10px;
+
+	li {
+		padding: 1px 0;
+	}
+
+	input {
+		margin-bottom: 0 !important;
+	}
+
+	ul.children,
+	ul.children ul.children,
+	ul.children ul.children ul.children {
+		margin-left: 20px;
+	}
+}
+
+/**/
+
+#tblspacer {
+	margin: 20px 0;
+}
+
+.fields-panel {
+	float: right;
+	width: 30%;
+}
+
+.edit-fields-panel {
+	float: left;
+	width: 68%;
+}
+
+.edit-fields-panel .mobile-only {
+	display: none;
+}
+
+.fixed {
+	.column-form-field {
+		width: 45%;
+
+		input[type=text],
+		select,
+		textarea {
+			width: 100%;
+		}
+	}
+
+	.column-date,
+	.column-author,
+	.column-taxonomy-ad_cat,
+	.column-taxonomy-ad_tag,
+	.column-cp_price,
+	.column-cp_daily_count,
+	.column-cp_total_count,
+	.column-cp_sys_expire_date,
+	.column-thumbnail,
+	.column-description,
+	.column-categories,
+	.column-modified,
+	.column-status,
+	.column-cfield-number,
+	.column-cfield-description,
+	.column-cfield-modified {
+		@media screen and (max-width: 782px) {
+			display: none;
+		}
+	}
+}
+
+span#curr {
+	vertical-align: top;
+}
+
+input.radiobutt {
+	vertical-align: text-top;
+}
+
+.admin-msg {
+	margin: 10px 10px -10px 10px;
+}
+/* css for custom fields meta box on ad edit page */
+
+.postbox .form-table td label {
+	display: block;
+}
+
+/* css for date& timepicker */
+
+#ui-datepicker-div {
+	font-size: 12px;
+}
+
+.ui-datepicker-trigger {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.ui-datepicker-trigger:before {
+	content: '\f508';
+}
+
+/* admin ajax sorting styles */
+
+tbody.ui-sortable tr {
+	border-top: 1px solid #DFDFDF;
+	border-left: 1px solid #DFDFDF;
+	border-right: 1px solid #DFDFDF;
+}
+
+tbody.sortable tr.even:hover {
+	cursor: move;
+}
+
+tr.ui-placeholder {
+	background-color: #DBDBDB;
+}
+
+tr.ui-state-highlight {
+	color: #F6F698;
+	height: 5.5em;
+	line-height: 1.2em;
+}
+
+tr.ui-sortable-helper {
+	height: 8.5em;
+	line-height: 1.2em;
+	background-color: #DBDBDB;
+}
+
+span#loading img {
+	margin-bottom: -1px;
+}
+/* dashboard charts */
+
+#placeholder {
+	width: 100%;
+	height: 250px;
+}
+
+#charttooltip {
+	font-size: 11px;
+	border: 1px solid #E3E3E3;
+	background-color: #F1F1F1;
+	padding: 3px 7px;
+	margin-left: 15px;
+	border-radius: 6px;
+	text-shadow: 1px 1px 0 #FFF;
+}
+
+#admin-order-summary {
+	margin-bottom: 20px;
+}
+/* icons */
+
+.custom-forms-ico {
+	vertical-align: text-top;
+	display: inline-block;
+}
+
+i.edit-layout:before {
+	content: '\f133';
+}
+
+i.edit-properties:before {
+	content: '\f119';
+}
+
+i.remove:before {
+	content: '\f158';
+	color: red;
+}
+
+i.remove-disabled:before {
+	color: #FFDADA;
+}
+
+/* Media Manager */
+.media-attachments {
+	display: table;
+}
+
+.media-attachment {
+	display: table-row;
+}
+
+.media-attachment .media-attachment-option,
+.media-attachment .media-attachment-thumb,
+.media-attachment .media-attachment-link,
+.media-attachment .file-description {
+	display: table-cell;
+	padding: 10px;
+}
+
+/* responsive */
+
+@media screen and (max-width: 782px) {
+	.fields-panel {
+		float: none;
+		width: 100%;
+	}
+	.edit-fields-panel .fixed .column-form-preview {
+		display: none;
+	}
+	.edit-fields-panel {
+		float: none;
+		width: 100%;
+	}
+	.edit-fields-panel .widefat th,
+	.edit-fields-panel .widefat td {
+		font-size: 12px;
+	}
+	.edit-fields-panel .mobile-only {
+		display: block;
+	}
+}

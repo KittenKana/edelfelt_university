@@ -1,0 +1,20 @@
+
+/* Foundation Framework
+----------------------------------------------- */
+
+$global-text-direction: rtl;
+
+// Customized base variables
+@import 'vendor/foundation/settings';
+
+// Base mixins
+@import '../../bower_components/foundation-sites/scss/foundation';
+
+// All css classes
+@include foundation-everything;
+
+// Customized base variables
+@import 'vendor/foundation/rtl';
+
+// Foundation motion ui library
+@import '../../bower_components/motion-ui/motion-ui';

@@ -1,0 +1,125 @@
+
+/* Edit Profile Page
+----------------------------------------------- */
+
+.profile-last-updated {
+	text-align: right;
+	font-size: 0.75rem;
+	font-style: italic;
+	color: #777;
+}
+
+.view-profile-link {
+	float: right;
+}
+
+.user-profile-edit .avatar-wrap {
+	margin: 0 0 1rem;
+}
+
+.user-profile-edit img.avatar {
+	width: 70px;
+	height: 70px;
+}
+
+.user-profile-edit .change-avatar {
+	margin-left: 10px;
+}
+
+.social-edit-profile .input-group-label {
+	min-width: 60px;
+	line-height: 1em;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.125);
+	border: 0;
+}
+
+.social-edit-profile .fa-icon::before {
+	font-size: 18px;
+}
+
+.social-edit-profile .input-group-field {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+
+/* Change password */
+
+#pass-strength-result {
+	background-color: $gray-smoke;
+	color: #23282D;
+	margin-top: 6px;
+	padding: 6px 12px;
+	text-align: center;
+	opacity: 0;
+	border-radius: 4px;
+}
+
+#pass-strength-result.short {
+	background-color: #F1ADAD;
+	border-color: #E35B5B;
+	opacity: 1;
+}
+
+#pass-strength-result.bad {
+	background-color: #FBC5A9;
+	border-color: #F78B53;
+	opacity: 1;
+}
+
+#pass-strength-result.good {
+	background-color: #FFE399;
+	border-color: #FFC733;
+	opacity: 1;
+}
+
+#pass-strength-result.strong {
+	background-color: #C1E1B9;
+	border-color: #83C373;
+	opacity: 1;
+}
+
+#pass1.short,
+#pass1-text.short {
+	border-color: #E35B5B;
+}
+
+#pass1.bad,
+#pass1-text.bad {
+	border-color: #F78B53;
+}
+
+#pass1.good,
+#pass1-text.good {
+	border-color: #FFC733;
+}
+
+#pass1.strong,
+#pass1-text.strong {
+	border-color: #83C373;
+}
+
+.pw-weak {
+	display: none;
+}
+
+.indicator-hint {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+#pass1-text,
+.show-password #pass1 {
+	display: none;
+}
+
+.input-group #pass1-text {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.show-password #pass1-text {
+	display: inline-block;
+}

@@ -1,0 +1,22 @@
+
+// Fix mobile menus RTL support
+.off-canvas {
+	.close-button {
+		left: 1rem;
+		right: auto;
+	}
+
+	.is-accordion-submenu-parent > a::after {
+		left: 1rem;
+		right: auto;
+	}
+}
+
+.header {
+	.top-bar-left {
+		float: right;
+	}
+	.top-bar-right {
+		float: left;
+	}
+}

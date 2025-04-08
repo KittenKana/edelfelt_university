@@ -1,0 +1,20 @@
+
+/* Callout mixin
+ ----------------------------------------------- */
+
+@mixin app-callout( $name, $color ) {
+	$hue: hsl( hue( $color ), 20%, 40% );
+
+	.callout.#{$name},
+	.notice.#{$name},
+	.error.#{$name} {
+		background-color: $color;
+		border-color: $color;
+		color: $hue;
+
+		& a {
+			color: $hue;
+			font-weight: 700;
+		}
+	}
+}

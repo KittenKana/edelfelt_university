@@ -1,0 +1,39 @@
+
+/* Pagination
+----------------------------------------------- */
+
+.pagination {
+	margin-bottom: 3em;
+
+	a,
+	button {
+		color: inherit;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $black;
+		}
+	}
+}
+
+.pagination .current {
+	padding: 0;
+}
+
+.image-navigation {
+	margin-bottom: 5px;
+}
+
+.image-navigation a,
+a.back-to-post {
+	color: $suva-grey;
+	font-size: 0.95rem;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $matterhorn;
+		text-decoration: none;
+	}
+}

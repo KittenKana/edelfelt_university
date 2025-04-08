@@ -1,0 +1,11 @@
+
+/* Breadcrumbs
+----------------------------------------------- */
+
+.content-area {
+	@include breakpoint(medium) {
+		#breadcrumb {
+			margin-top: rem-calc( -35 );
+		}
+	}
+}

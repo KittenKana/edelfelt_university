@@ -1,0 +1,84 @@
+
+/* Labels
+----------------------------------------------- */
+
+.label,
+.label a {
+	background: $white-smoke;
+	color: #777;
+}
+
+.label.primary,
+.label.primary a {
+	color: $white;
+}
+
+.label.secondary,
+.label.secondary a {
+	background: $secondary-color;
+}
+
+.label.info,
+.label.info a {
+	background: $info-color;
+	color: $white;
+}
+
+.label.success,
+.label.success a {
+	background: $success-color;
+}
+
+.label.warning,
+.label.warning a {
+	background: $warning-color;
+}
+
+.label.alert,
+.label.alert a {
+	background: $alert-color;
+}
+
+.simple_tag,
+#sidebar .widget_meta a abbr {
+	background-color: #F3F3F4;
+	border: 1px solid #E7EAEC;
+	border-radius: 2px;
+	color: inherit;
+	font-size: 9.5px;
+	font-weight: 600;
+	margin-right: 5px;
+	margin-top: 5px;
+	padding: 5px 12px;
+	display: inline-block;
+}
+
+#sidebar .widget_meta a abbr {
+	margin: 0 0 0 5px;
+	border-radius: 2px;
+	color: $suva-grey;
+	font-weight: 400;
+	padding: 2px 8px;
+	border: 0;
+	cursor: pointer;
+	vertical-align: text-bottom;
+}
+
+.simple_tag a {
+	color: $matterhorn;
+}
+
+.featured-label {
+	font-family: 'Roboto';
+	margin-bottom: 10px;
+	font-size: 0.7rem;
+	letter-spacing: -0.5px;
+	text-transform: uppercase;
+
+	@include breakpoint(medium) {
+		position: absolute;
+		top: 0;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}

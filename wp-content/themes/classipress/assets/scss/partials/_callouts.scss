@@ -1,0 +1,51 @@
+
+/* WordPress and Foundation notices/error boxes
+----------------------------------------------- */
+
+div.notice {
+	@include callout();
+}
+
+.callout,
+div.notice {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+ul.errors {
+	list-style-type: none;
+	margin: 0;
+}
+
+
+/* Setup the map */
+$callouts: (
+	primary: $primary-callout,
+	secondary: $secondary-callout,
+	success: $success-callout,
+	info: $info-callout,
+	warning: $warning-callout,
+	alert: $alert-callout,
+	error: $error-callout,
+	checkout-error: $error-callout,
+) !default;
+
+/* Loop through and build out the callouts */
+@each $callout, $color in $callouts {
+	@include app-callout( $callout, $color );
+}
+
+.error.primary {
+	background-color: $error-callout;
+	border-color: $error-callout;
+	color: hsl( hue( $error-callout ), 20%, 40% );
+
+	& a {
+		color: hsl( hue( $error-callout ), 20%, 40% );
+		font-weight: 700;
+	}
+}
+
+.callout.license {
+	max-height: 15rem;
+	overflow: auto;
+}

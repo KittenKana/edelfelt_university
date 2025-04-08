@@ -1,0 +1,276 @@
+
+/*
+ * Generates all color schemes using this template.
+ *
+ * Anything scheme color-related (no matter what element)
+ * should be put in here so it's applied to all color
+ * scheme changes. Also, make sure to update
+ * /includes/customizer/styles/color.php since it's hardcoded
+ * for custom colors. Just copy block from style.css and
+ * replace # hex colors with variables.
+ ----------------------------------------------- */
+
+@mixin theme( $name, $color ) {
+	$primary: $color;
+	$secondary: darken( $color, 5% );
+	$lighten: lighten( $color, 20% );
+
+	.#{$name} {
+		/* Foundation */
+
+		a {
+			color: $primary;
+
+			&:hover,
+			&:focus {
+				color: $secondary;
+			}
+		}
+
+		.button {
+			background-color: $primary;
+			color: foreground($primary);
+
+			&:hover,
+			&:focus {
+				background-color: $secondary;
+				color: foreground($primary);
+			}
+
+			&.primary {
+				background-color: $primary;
+
+				&:hover,
+				&:focus {
+					background-color: $secondary;
+					color: foreground($primary);
+				}
+			}
+
+			&.hollow {
+				border-color: $primary;
+				color: $primary;
+				background-color: transparent;
+
+				&:hover,
+				&:focus {
+					background-color: $secondary;
+					border-color: $secondary;
+					color: foreground($primary);
+				}
+
+				&primary {
+					border-color: $primary;
+					color: $primary;
+
+					&:hover,
+					&:focus {
+						border-color: $secondary;
+						color: $secondary;
+					}
+				}
+			}
+
+			&.disabled {
+				&:hover,
+				&:focus {
+					background-color: $primary;
+				}
+
+				&.primary {
+					&:hover,
+					&:focus {
+						background-color: $primary;
+					}
+				}
+			}
+		}
+
+		.accordion-title {
+			color: $primary;
+		}
+
+		.is-accordion-submenu-parent > a::after {
+			border-color: $primary transparent transparent;
+		}
+
+		.badge {
+			background: $primary;
+		}
+
+		.breadcrumbs a {
+			color: $primary;
+		}
+
+		.button-group.primary .button {
+			background-color: $primary;
+
+			&:hover,
+			&:focus {
+				background-color: $secondary;
+				color: foreground($primary);
+			}
+		}
+
+		.menu .active > a {
+			background: $primary;
+		}
+
+		.is-drilldown-submenu-parent > a::after {
+			border-color: transparent transparent transparent $primary;
+		}
+
+		.js-drilldown-back > a::before {
+			border-color: transparent $primary transparent transparent;
+		}
+
+		.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+			border-color: $primary transparent transparent;
+		}
+
+		.dropdown.menu.vertical > li.opens-left > a::after {
+			border-color: transparent $primary transparent transparent;
+		}
+
+		.dropdown.menu.vertical > li.opens-right > a::after {
+			border-color: transparent transparent transparent $primary;
+		}
+
+		.dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+			border-color: $primary transparent transparent;
+		}
+
+		.dropdown.menu.medium-vertical > li.opens-left > a::after {
+			border-color: transparent $primary transparent transparent;
+		}
+
+		.dropdown.menu.medium-vertical > li.opens-right > a::after {
+			border-color: transparent transparent transparent $primary;
+		}
+
+		.dropdown.menu.large-horizontal > li.is-dropdown-submenu-parent > a::after {
+			border-color: $primary transparent transparent;
+		}
+
+		.dropdown.menu.large-vertical > li.opens-left > a::after {
+			border-color: transparent $primary transparent transparent;
+		}
+
+		.dropdown.menu.large-vertical > li.opens-right > a::after {
+			border-color: transparent transparent transparent $primary;
+		}
+
+		.is-dropdown-submenu .is-dropdown-submenu-parent.opens-left > a::after {
+			border-color: transparent $primary transparent transparent;
+		}
+
+		.is-dropdown-submenu .is-dropdown-submenu-parent.opens-right > a::after {
+			border-color: transparent transparent transparent $primary;
+		}
+
+		/*.label {
+			background: $primary;
+			color: foreground($primary);
+		}*/
+
+		.pagination .current {
+			background: $primary;
+
+			a {
+				&:hover,
+				&:focus,
+				&:active {
+					color: inherit;
+					background: $primary;
+				}
+			}
+		}
+
+		.progress.primary .progress-meter {
+			background-color: $primary;
+		}
+
+		.progress-meter {
+			background-color: $primary;
+		}
+
+		.slider-handle {
+			background-color: $primary;
+		}
+
+		input:checked ~ .switch-paddle {
+			background: $primary;
+		}
+
+		.tabs.primary {
+			border-bottom: 3px solid $primary !important;
+
+			> .tabs-title > a[aria-selected='true'] {
+				background: $primary;
+				color: foreground($primary);
+			}
+
+			> .tabs-title > a {
+				&:hover,
+				&:focus {
+					background: smart-scale($primary);
+					color: foreground($primary);
+				}
+			}
+		}
+
+		/* Form Progress Indicator, see https://foundation.zurb.com/building-blocks/blocks/progress-indicator.html
+		----------------------------------------------- */
+		.progress-indicator > li {
+			&.is-complete {
+				color: $primary;
+
+				&::before,
+				&::after {
+					background: $primary;
+				}
+
+				span {
+					color: $primary;
+				}
+			}
+			&.is-current {
+				color: $lighten;
+
+				&::before {
+					background: $lighten;
+				}
+
+				span {
+					color: $lighten;
+				}
+			}
+		}
+
+		/* Secondary Menu */
+		#top-bar-secondary {
+			background-color: $primary;
+			#menu-header > .menu-item > a {
+				color: foreground($primary);
+			}
+		}
+
+		/* Misc */
+
+		#topcontrol {
+			background: $primary;
+		}
+
+		#topcontrol:hover {
+			background: $secondary;
+		}
+
+		.price-wrap .tag-head {
+			background: $primary;
+		}
+
+		.refine-categories-list-label::after {
+			border-color: $primary transparent transparent;
+		}
+	}
+}

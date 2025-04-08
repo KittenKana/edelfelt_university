@@ -1,0 +1,20 @@
+
+/* Image Attachment Page
+----------------------------------------------- */
+
+.entry-attachment {
+	text-align: center;
+}
+
+.type-attachment .entry-meta {
+	color: inherit;
+}
+
+.type-attachment .entry-caption {
+	padding: 1em 0;
+	font-size: 14px;
+
+	@include breakpoint(medium) {
+		margin-bottom: 2em;
+	}
+}

@@ -1,0 +1,715 @@
+
+/* Widgets
+----------------------------------------------- */
+
+.widget {
+	hyphens: auto;
+	word-wrap: break-word;
+
+	.widget-title {
+		margin: 0 0 1em;
+		line-height: 1.2em;
+		font-size: 1.5rem;
+
+		i.fa {
+			margin-right: 10px;
+		}
+	}
+
+	.button {
+		margin: 1.25rem 0 0;
+	}
+
+	ul {
+		margin: 0;
+		list-style: none;
+	}
+
+	li {
+		padding: 0.25rem 0;
+	}
+
+	.menu > li {
+		display: block;
+	}
+}
+
+.widget-footer {
+	.menu > li {
+		display: block;
+		padding: 0.25rem 0;
+
+		a {
+			padding: 0;
+		}
+	}
+}
+
+#sidebar .widget {
+	.widget-title a,
+	ul li a {
+		color: inherit;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $suva-grey;
+			text-decoration: none;
+		}
+	}
+}
+
+.widget-area > :last-child,
+.widget > :last-child {
+	margin-bottom: 0;
+}
+
+
+/* search input widget */
+
+.widget_search input {
+	margin: 0 !important;
+}
+
+.widget_search .input-group {
+	margin-bottom: 0;
+}
+
+/* listing content widget */
+.widget_cp_widget_listing_content {
+	ul {
+		list-style-type: disc;
+		margin-left: 1.25rem;
+	}
+
+	.hero-listing-bar {
+		position: initial;
+		background: none;
+		padding-bottom: 0;
+	}
+
+	.hero-listing-bar .listing-icon {
+		border: 1px solid rgba(0,0,0,0.3);
+	}
+
+	footer.entry-footer {
+		margin-top: 2rem;
+	}
+}
+
+/* listing map contact widget */
+
+
+
+/* listing custom fields widget */
+
+table.listing-custom-fields tbody {
+	border: none;
+	background-color: #FFF;
+}
+
+table.listing-custom-fields tbody tr:nth-child(even) {
+	background-color: #FFF;
+}
+
+table.listing-custom-fields tr {
+	border-bottom: 1px solid #E0E0E0;
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+table.listing-custom-fields td {
+	padding: 0.25rem 0;
+	font-size: 1rem;
+	word-break: normal;
+}
+
+table.listing-custom-fields td.listing-custom-field-title {
+	font-weight: 700;
+	padding-right: 0.625rem;
+}
+
+.custom-text-area ul {
+	list-style: disc;
+	margin-left: 1.25rem;
+}
+
+/* listing author widget */
+
+.listing-owner-avatar {
+	margin-bottom: 1.25rem;
+}
+
+.listing-owner-avatar img {
+	display: block;
+	margin: 0 auto;
+}
+
+h3.listing-owner-name {
+	margin-bottom: 0;
+}
+
+.listing-owner-headline {
+	display: block;
+	margin-bottom: 1.25rem;
+	font-size: 90%;
+}
+
+.listing-owner-contact a.button {
+	margin: 1.25rem 0 0;
+}
+
+
+/* Reveal slider widget */
+.listing-photos-modal {
+	background-color: $matterhorn;
+	border-color: $matterhorn;
+
+	.slick-track,
+	.slick-list,
+	.listing-photos-modal-content {
+		height: 100%;
+		max-height: 100%;
+	}
+
+	.slick-slide img {
+		max-height: 90%;
+	}
+
+	.slick-slider.slick-dotted {
+		height: 90%;
+		max-height: 90%;
+	}
+
+	.slick-arrow:before,
+	.close-button:hover,
+	.close-button:focus {
+		color: #FFF;
+	}
+
+	.slick-arrow:before,
+	.close-button,
+	.slide-caption,
+	.listing-carousel-header {
+		color: #DADADA;
+	}
+
+	.listing-carousel-header {
+		display: block;
+	}
+}
+
+.items-featured-wrapper {
+	position: relative;
+
+	.items-featured {
+		.slick-list {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+
+		overflow: hidden;
+	}
+}
+
+/* hack since slick slider adds extra padding
+ * and we need enough to show box-shadow
+ */
+.item-single-featured.slick-slide {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 2px;
+
+	.content-wrap {
+		margin-bottom: 0;
+	}
+}
+
+.item-single-featured .featured-cover {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.item-single-featured .subheader {
+	max-height: 140px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+	font-family: FontAwesome;
+	font-size: 40px;
+	line-height: 1;
+	opacity: 0.75;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@include breakpoint(medium) {
+		font-size: 70px;
+		.listing-image-slider-wrapper & {
+			font-size: 40px;
+		}
+	}
+}
+
+.slick-prev,
+.slick-next {
+	height: auto;
+	z-index: 2;
+
+	@include breakpoint(small only) {
+		top: 20%;
+	}
+}
+
+// Global width + 2 * arrow width + margins.
+$slick-arrow-breakpoint: $global-width + rem-calc(124);
+
+[dir='rtl'] .slick-prev,
+.slick-prev {
+	left: 15px;
+
+	@include breakpoint($slick-arrow-breakpoint) {
+		left: -35px;
+	}
+}
+
+[dir='rtl'] .slick-next,
+.slick-next {
+	right: 15px;
+
+	@include breakpoint($slick-arrow-breakpoint) {
+		right: -30px;
+	}
+}
+
+.tiled-row.clearfix {
+	@include breakpoint($slick-arrow-breakpoint) {
+		[dir='rtl'] .slick-prev,
+		.slick-prev {
+			left: 15px;
+		}
+		[dir='rtl'] .slick-next,
+		.slick-next {
+			right: 15px;
+		}
+	}
+	.home-widget > .row {
+		max-width: none;
+	}
+}
+
+.slick-prev:before {
+	content: '\f104';
+}
+[dir='rtl'] .slick-prev:before {
+	content: '\f105';
+}
+
+.slick-next:before {
+	content: '\f105';
+}
+[dir='rtl'] .slick-next:before {
+	content: '\f104';
+}
+
+ul.slick-dots li button:before {
+	font-size: 20px;
+}
+
+ul.slick-dots {
+	margin-left: 0;
+}
+
+.slick-slide img {
+	margin: 0 auto;
+	border-radius: 4px;
+}
+
+.listing-image-slider {
+	margin-bottom: 0.5rem;
+}
+
+.listing-image-slider .slick-list {
+	border-radius: 4px;
+}
+
+.listing-image-slider-banner .slick-list,
+.listing-image-slider-banner .slick-track {
+	height: 100%;
+}
+
+.listing-image-slider-wrapper.no-js {
+	white-space: nowrap;
+	overflow: hidden;
+
+	.listing-image-slider > div {
+		display: inline;
+	}
+
+	/* Aspect ratio hack for sliders before JS loaded, not critical, works for browsers that supports it */
+	[style*='--aspect-ratio'] > :first-child {
+		width: 100%;
+	}
+	[style*='--aspect-ratio'] > img {
+		height: auto;
+	}
+	@supports (--custom:property) {
+		[style*='--aspect-ratio'] {
+			position: relative;
+		}
+		[style*='--aspect-ratio']::before {
+			content: '';
+			display: block;
+			padding-bottom: calc(100% / (var(--aspect-ratio)));
+		}
+		[style*='--aspect-ratio'] > :first-child {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+		}
+	}
+}
+
+.reveal-overlay,
+.without-overlay {
+	.close-button {
+		@include breakpoint(medium) {
+			font-size: 2.5em;
+		}
+	}
+
+	.slide-caption {
+		font-size: 90%;
+		margin-top: 10px;
+		text-align: center;
+	}
+}
+
+
+/* Photo grid table */
+
+table.listing-photo-grid {
+	margin-bottom: 0;
+	border-collapse: initial;
+}
+
+table.listing-photo-grid td {
+	vertical-align: top;
+	background-color: $matterhorn;
+}
+
+table.listing-photo-grid tbody tr:nth-child(even) {
+	background-color: #FFF;
+}
+
+.listing-image-slider .slick-slide,
+.listing-photo-grid a {
+	&:hover,
+	&:focus,
+	&:active {
+		opacity: 0.7!important;
+		color: #FFF;
+	}
+}
+
+.listing-image-slider .slick-slide,
+.listing-photo-grid a {
+	transition: all 0.4s ease;
+	opacity: 1;
+	cursor: pointer;
+}
+
+.listing-image-slider-banner .slick-slide {
+	cursor: zoom-in;
+}
+
+.listing-photo-grid-main {
+	width: 80%;
+	padding: 0;
+	border-right: 5px solid #FFF;
+}
+
+.listing-photo-grid-sub {
+	padding: 0;
+	position: relative;
+}
+
+.listing-photo-grid-sub img {
+	border-bottom: 5px solid #FFF;
+}
+
+.listing-photo-grid-more {
+	position: absolute;
+	z-index: 2;
+	padding: 10px;
+	text-align: center;
+	color: #FFF;
+	left: 0;
+	bottom: -1px;
+	width: 100%;
+	background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0.4) 50%,#000 75%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000',endColorstr='#b8000000',GradientType=0);
+}
+
+.listing-photo-grid-more span {
+	display: inline-block;
+	font-size: 0.75em;
+	font-weight: 700;
+	letter-spacing: -0.5px;
+}
+
+.listing-photo-grid-more a {
+	color: #FFF;
+}
+
+
+/* User stats widget */
+
+.stat-section-wrap {
+	margin-bottom: 1em;
+}
+
+ul.stat-section .stat-value {
+	float: right;
+}
+
+ul.stat-section .stat-publish .stat-value {
+	background: $success-color;
+}
+
+ul.stat-section .stat-pending .stat-value {
+	background: $warning-color;
+}
+
+ul.stat-section .stat-expired .stat-value {
+	background: $alert-color;
+}
+
+ul.stat-section .stat-draft .stat-value {
+	background: $info-color;
+}
+
+ul.stat-section .stat-total .stat-value {
+	background: $secondary-color;
+}
+
+ul.stat-section .stat-total {
+	font-weight: 600;
+}
+
+
+/* blog post widget */
+.view-more-articles,
+.view-more-listings {
+	text-align: center;
+}
+
+
+/* slider widget */
+.slick-prev:before,
+.slick-next:before {
+	color: $matterhorn;
+}
+
+.items-featured .slick-slide img {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.items-featured .featured-cover {
+	padding: 7em 0;
+
+	@include breakpoint(medium) {
+		padding: 10em 0;
+	}
+}
+
+.items-featured .slick-slide a.button {
+	width: 100%;
+	margin-bottom: 0;
+
+	@include breakpoint(medium) {
+		width: auto;
+	}
+}
+
+
+/* Page callout widget */
+section.widget_cp_widget_callout_box {
+	margin: 0 !important;
+}
+
+.callout-wrap a.button {
+	text-decoration: none !important;
+}
+
+.callout-wrap a:hover {
+	text-decoration: none !important;
+}
+
+.callout-cover-wrap {
+	position: relative;
+}
+
+.callout-content-wrap {
+	position: relative;
+	z-index: 20;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+
+	@include breakpoint(medium) {
+		padding-top: 6rem;
+		padding-bottom: 6rem;
+	}
+
+	@include breakpoint(large) {
+		padding-top: 10rem;
+		padding-bottom: 10rem;
+	}
+}
+
+.callout-content-wrap.text-center .callout-title,
+.callout-content-wrap.text-center .callout-content {
+	margin-left: auto;
+	margin-right: auto;
+
+	@include breakpoint(large) {
+		max-width: 70%;
+	}
+}
+
+.callout-cover.has-image:before {
+	content: ' ';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.callout-content p {
+	line-height: 1.75;
+}
+
+.callout-content-wrap .button,
+.callout-content p:last-child {
+	margin-bottom: 0;
+}
+
+.callout-content-wrap .input-group-button .button {
+	margin-bottom: 1rem;
+}
+
+/* Download app buttons */
+
+.apps-list .button.hollow {
+	border: 2px solid #FFF;
+	color: #FFF;
+}
+
+.apps-list .button.hollow:hover {
+	border: 2px solid rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.2);
+	color: #FFF;
+}
+
+a.download-app,
+.download-app {
+	padding-left: 45px;
+	position: relative;
+}
+a.download-app .fa,
+.download-app .fa {
+	position: absolute;
+	left: 10px;
+	font-size: 24px;
+}
+a.download-app .intro-text,
+.download-app .intro-text {
+	display: block;
+	font-size: 10px;
+	text-align: left;
+}
+a.download-app .main-text,
+.download-app .main-text {
+	display: block;
+	font-size: 16px;
+	text-align: left;
+}
+
+/* Sidebar Posts widgets */
+
+.from-blog {
+	p {
+		display: block;
+		font-size: 12px;
+		font-style: normal;
+	}
+
+	.side-meta {
+		color: $suva-grey;
+		margin-bottom: 0.5rem;
+	}
+
+	.post-thumb {
+		margin-right: 0.75em;
+		top: 3px;
+		float: left;
+		position: relative;
+
+		img {
+			border-radius: 50%;
+		}
+	}
+}
+
+/* Sidebar Ads widgets */
+
+.recent-ads {
+	.media-object {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	.media-object-section:first-child {
+		width: 116px;
+	}
+
+	.media-object-section:last-child:not(:nth-child(2)) {
+		padding-left: 0;
+	}
+
+	.recent-ad-content,
+	.recent-ad-meta-item {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.recent-ad-meta {
+		font-size: rem-calc(12);
+		color: $suva-grey;
+
+		a {
+			color: $suva-grey;
+		}
+
+		.fa {
+			margin-right: 0.5rem;
+		}
+
+		.recent-ad-meta-item {
+			padding: 0.125rem;
+		}
+	}
+
+	.recent-ad-price {
+		font-size: rem-calc(14);
+		font-weight: 600;
+		color: $matterhorn;
+	}
+}

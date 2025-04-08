@@ -1,0 +1,27 @@
+
+/* Foundation Framework
+----------------------------------------------- */
+
+// Customized base variables
+@import 'vendor/foundation/settings';
+
+// Base mixins
+@import '../../bower_components/foundation-sites/scss/foundation';
+
+// Include only the typopgraphy css classes since it's an editor
+@include foundation-typography;
+
+
+/* Variables and Mixins
+----------------------------------------------- */
+@import "modules/variables";
+
+
+/* Main Core
+----------------------------------------------- */
+@import "partials/typography";
+
+
+/* Main Editor Styles
+----------------------------------------------- */
+@import "partials/admin/editor";

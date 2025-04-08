@@ -1,0 +1,77 @@
+
+/* Footer
+----------------------------------------------- */
+
+#footer {
+	background-color: #313131;
+	color: rgba(255, 255, 255, 0.7);
+	padding: rem-calc(45 0);
+	font-size: 1rem;
+}
+
+.site-footer a,
+#footer abbr,
+#footer acronym {
+	color: rgba(255, 255, 255, 0.7);
+	transition: all 0.25s ease-out, color 0.25s ease-out;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: #FFF;
+		text-decoration: none;
+	}
+}
+
+#footer ul {
+	list-style: none;
+}
+
+.footer-top ul {
+	margin: 0;
+}
+
+.footer-top .widget-title {
+	font-size: rem-calc(18);
+	color: #FFF;
+}
+
+#footer .divider {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-nav .inline-list {
+	margin-bottom: 0;
+}
+
+.footer-bottom {
+	text-align: center;
+}
+
+.footer-bottom .social-media {
+	margin-bottom: 15px;
+}
+
+.footer-bottom .social-media li .fa {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background-clip: padding-box;
+	background: rgba(0, 0, 0, 0.1);
+	line-height: 32px;
+	transition: all 0.25s ease-out, color 0.25s ease-out;
+	font-size: 16px;
+}
+
+.footer-bottom .social-media li .fa:hover {
+	background: rgba(0, 0, 0, 0.2);
+	color: #FFF;
+}
+
+.footer-bottom .copyright {
+	color: rgba(255, 255, 255, 0.4);
+	font-size: 0.80rem;
+}

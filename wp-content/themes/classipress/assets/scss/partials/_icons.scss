@@ -1,0 +1,115 @@
+
+/* Icons
+----------------------------------------------- */
+
+/* social icons */
+
+.fa-icon::before {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+}
+
+.social-icons li {
+	margin: 0 10px 10px 0;
+	display: inline-block;
+}
+
+.social-icons li:last-child {
+	margin-right: 0;
+}
+
+.social-icons a:before {
+	color: #FFF;
+	font-size: 18px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.social-icons a {
+	border-radius: 50%;
+	color: #FFF;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+
+ul.social-icons a {
+	transition: all 0.4s ease;
+	opacity: 1;
+}
+
+.social-icons a:hover {
+	opacity: 0.7;
+}
+
+.social-icons .fa-twitter {
+	background-color: #56A3D9;
+}
+
+.social-icons .fa-facebook {
+	background-color: #3B5998;
+}
+
+.social-icons .fa-google-plus {
+	background-color: #DD4B39;
+}
+
+.social-icons .fa-youtube {
+	background-color: #BF221F;
+}
+
+.social-icons .fa-linkedin {
+	background-color: #0077B5;
+}
+
+.social-icons .fa-pinterest {
+	background-color: #CB211D;
+}
+
+.social-icons .fa-instagram {
+	background-color: #3F729B;
+}
+
+.social-icons .fa-github {
+	background-color: #221E1B;
+}
+
+.social-icons .fa-vimeo {
+	background-color: #51B5E7;
+}
+
+.social-icons .fa-flickr {
+	background-color: #1E1E1B;
+}
+
+.social-icons .fa-foursquare {
+	background-color: #F94877;
+}
+
+.social-icons .fa-wordpress {
+	background-color: #464646;
+}
+
+
+/**
+ * Custom tooltip icon
+ * see cp_tooltip_icon()
+ *
+ * @since 4.0.0
+ */
+
+.cp-tooltip i.fa {
+	margin: 0 5px;
+	color: $secondary-color;
+}
+
+.page-header .rss-link-icon {
+	float: right;
+}

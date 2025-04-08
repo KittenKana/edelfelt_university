@@ -1,0 +1,79 @@
+
+/* Dashboard Page
+----------------------------------------------- */
+
+.dashboard-actions li {
+	padding: 0 !important;
+}
+
+.expired-date {
+	color: $alert-color;
+}
+
+.listing_title span.label {
+	margin-left: 5px;
+}
+
+.dashboard-listings .status {
+	.label {
+		background: none;
+		border: 1px solid;
+	}
+
+	.live {
+		color: $success-color;
+	}
+
+	.pending_moderation,
+	.pending_payment {
+		color: $alert-color;
+	}
+
+	.sold,
+	.offline {
+		color: $warning-color;
+	}
+}
+
+.dashboard-listings .ad_thumbnail img {
+	max-width: 50px;
+	border-radius: 50%;
+}
+
+.dashboard-listings .listing_title img {
+	border-radius: 4px;
+}
+
+.dashboard-listings .listing-row {
+	@include breakpoint(medium down) {
+		border: 1px solid $white-smoke;
+	}
+}
+
+.dashboard-listings .views {
+	white-space: nowrap;
+}
+
+/* dashboard favorites page */
+
+.fave-added,
+.claim-requested {
+	text-align: right;
+	font-size: 0.8rem;
+	font-style: italic;
+	color: #777;
+	line-height: 1.7em;
+}
+
+.pending-claimed span.label {
+	position: absolute;
+}
+
+/* dashboard orders */
+
+#order_status_filters {
+	.button,
+	input {
+		margin-bottom: 0;
+	}
+}

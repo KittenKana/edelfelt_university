@@ -1,0 +1,186 @@
+
+/* Archive Pages
+----------------------------------------------- */
+
+.display-list .content-inner {
+	@include breakpoint(medium) {
+		padding-left: 0;
+		min-height: rem-calc(210);
+	}
+}
+
+.listing-wrap article {
+	&.display-grid,
+	&.display-list {
+		.content-inner {
+			position: relative;
+		}
+	}
+
+	&.display-list {
+		@include breakpoint(medium) {
+			height: rem-calc(210);
+		}
+
+		.item-cover {
+			padding: 0;
+		}
+	}
+}
+
+article.display-list .item-cover {
+	height: rem-calc(210);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	position: inherit;
+
+	@include breakpoint(medium) {
+		border-bottom-left-radius: 4px;
+		border-top-right-radius: 0;
+	}
+}
+
+article.display-list .item-cover:after {
+	background: rgba(0,0,0,0);
+	content: none;
+}
+
+.listing-wrap .display-list figure {
+	@include breakpoint(medium) {
+		height: auto;
+	}
+}
+
+
+/* Legacy?
+----------------------------------------------- */
+#listing-layout {
+	text-align: right;
+	@include breakpoint(small only) {
+		display: none;
+	}
+}
+
+.listing-filters-head {
+	border-top: 1px solid $gray-smoke;
+	border-bottom: 1px solid $gray-smoke;
+	height: 60px;
+	margin: 0;
+	margin-bottom: 30px;
+}
+
+.refine-search-field-wrap {
+	padding: 0.5rem 0;
+	color: $black;
+	font-size: 0.875rem;
+	border-bottom: 1px solid $gray-smoke;
+}
+
+.refine-categories-list-label {
+	position: relative;
+	width: 100%;
+}
+
+.refine-categories-list-label::after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 0;
+	border: inset 6px;
+	border-top-style: solid;
+	border-bottom-width: 0;
+	position: absolute;
+	top: 50%;
+	margin-top: -4px;
+	right: 0;
+}
+
+.refine-categories-list-label.open::after {
+	transform-origin: 50% 50%;
+	transform: scaleY(-1);
+}
+
+.refine-categories-list-wrap {
+	display: none;
+	margin: 0;
+	background-color: $white;
+	max-height: 200px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.refine-search-field-wrap label {
+	display: inline-block;
+}
+
+.refine-search-field-wrap .input-aria-controls {
+	display: inline-block;
+	width: auto;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	box-shadow: none;
+	background-color: #FFF;
+	font-size: 0.875rem;
+
+	&#sliderRadius {
+		width: 30px;
+		text-align: right;
+	}
+}
+
+.refine-search-field-wrap .slider {
+	margin-top: 0;
+}
+
+.refine-search-field-wrap .slider-text {
+	margin-top: -2.25rem;
+}
+
+label.selectit [type='checkbox'] {
+	margin: 0;
+	margin-right: 0.25rem;
+}
+
+.cp_sort_list {
+	position: relative;
+	margin-top: 15px;
+	top: 0;
+	left: 0;
+	color: #666;
+	font-size: 12px;
+	z-index: 11;
+}
+
+.cp_sort_list_wrap {
+	width: 149px;
+	position: absolute;
+	top: 10px;
+	left: 0;
+	z-index: 10;
+	border: 1px solid #EFEFEF;
+	display: none;
+	background: #FFF;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	box-shadow: 1px 1px 1px #DDD;
+}
+
+.cp_sort_list_selected {
+	display: none;
+}
+
+.listing-wrap.list-view .item-single {
+	@include breakpoint(medium) {
+		display: table;
+		width: 100%;
+		margin-bottom: 2em;
+	}
+}
+
+.listing-wrap.list-view .item-single img {
+	@include breakpoint(medium) {
+		float: left;
+		max-width: 250px;
+	}
+}

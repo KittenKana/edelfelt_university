@@ -1,0 +1,13 @@
+/*
+Theme Name:     ClassiPress Example Child Theme
+Theme URI:      https://appthemes.com/
+Description:    Example child theme for the ClassiPress theme
+Author:         AppThemes
+Author URI:     https://appthemes.com/
+Template:       classipress
+Version:        0.1.0
+*/
+
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}

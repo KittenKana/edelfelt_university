@@ -1,0 +1,193 @@
+
+/* Tables
+----------------------------------------------- */
+
+thead,
+tfoot {
+	color: $matterhorn;
+}
+
+.table-plain tbody tr {
+	background-color: #FFF;
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid $white-smoke;
+}
+
+.table-plain tbody tr:last-child {
+	border-bottom: 1px solid #FFF;
+}
+
+.table-plain tbody tr:hover {
+	background-color: $concrete;
+	border-top: 1px solid $white-smoke;
+}
+
+.table-plain tbody {
+	border: 0;
+	background-color: #FFF;
+}
+
+
+/* Bootstrap Table
+----------------------------------------------- */
+
+.table-bootstrap th,
+.table-bootstrap td {
+	border-top: 1px solid #ECEEEF;
+}
+
+.table-bootstrap thead,
+.table-bootstrap tbody,
+.table-bootstrap tfoot {
+	border: 0;
+}
+
+.table-bootstrap thead th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #ECEEEF;
+	background-color: #FFF;
+}
+
+.table-bootstrap tbody + tbody {
+	border-top: 2px solid #ECEEEF;
+}
+
+.table-bootstrap .table-bootstrap {
+	background-color: #FFF;
+}
+
+
+/* Listing Plans
+----------------------------------------------- */
+
+.table-listing-plans tbody tr:hover {
+	cursor: pointer;
+}
+
+.table-listing-plans .plan-radio {
+	text-align: center;
+}
+
+.table-listing-plans .plan-details h4 {
+	font-size: 1.25rem;
+	margin-bottom: 0;
+}
+
+.table-listing-plans .plan-description {
+	color: #777;
+}
+
+.table-listing-plans td.plan-costs {
+	text-align: center;
+
+	@include breakpoint(m-large) {
+		text-align: right;
+	}
+}
+
+.table-listing-plans td.plan-costs .dropdown-pane {
+	text-align: left;
+}
+
+.table-listing-plans td.plan-costs [type='checkbox'] {
+	margin-bottom: 0.5rem;
+}
+
+.table-listing-plans td.plan-costs .addon-featured-wrap label {
+	color: $matterhorn;
+	font-size: 0.8rem;
+}
+
+.table-listing-plans td.plan-costs .addon-featured-wrap label:hover {
+	cursor: pointer;
+}
+
+.table-listing-plans .addon-relist-wrap {
+	padding-top: 10px;
+}
+
+.table-listing-plans td.plan-costs .dropdown-pane select {
+	margin: 0;
+	font-size: 14px;
+}
+
+.table-listing-plans .plan-categories {
+	font-size: 0.75rem;
+	font-style: italic;
+	color: $suva-grey;
+}
+
+.table-listing-plans .plan-addons button {
+	margin: 0;
+}
+
+/* Listing Preview
+----------------------------------------------- */
+.table-listing-preview {
+	td:nth-child(1) {
+		width: 1px;
+		white-space: nowrap;
+	}
+}
+
+/* Table Expand
+----------------------------------------------- */
+.table-expand-row {
+	&.is-active {
+		.expand-icon::after {
+			content: '-';
+		}
+	}
+
+	.expand-icon::after {
+		content: '+';
+		float: right;
+	}
+}
+
+// this is where the magic happens
+.table-expand-row-content {
+	display: none;
+	&.is-active {
+		display: table-row;
+		animation: fadeIn ease-in 1;
+		animation-fill-mode: both;
+		animation-duration: 0.5s;
+	}
+}
+
+.table-plain tbody tr.table-expand-row-content {
+	background-color: #F7F7F7;
+}
+
+/* Sorting Indicators
+----------------------------------------------- */
+.sorting-handle {
+	visibility: hidden;
+}
+
+.desc:hover,
+.desc:focus,
+.asc:hover,
+.asc:focus,
+.sorted-col {
+	.sorting-handle {
+		visibility: visible;
+	}
+}
+
+.asc,
+.sorted-col.desc:hover,
+.sorted-col.desc:focus {
+	.sorting-handle:before {
+		content: '\f0d8';
+	}
+}
+
+.desc,
+.sorted-col.asc:hover,
+.sorted-col.asc:focus {
+	.sorting-handle:before {
+		content: '\f0d7';
+	}
+}

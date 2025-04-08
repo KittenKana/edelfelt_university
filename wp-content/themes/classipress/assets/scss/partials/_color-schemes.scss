@@ -1,0 +1,21 @@
+
+/* Customizer Color Schemes
+----------------------------------------------- */
+
+/* Setup the map */
+$themes: (
+	theme-blue: $primary-blue,
+	theme-green: $primary-green,
+	theme-orange: $primary-orange,
+	theme-red: $primary-red,
+	theme-teal: $primary-teal,
+	theme-purple: $primary-purple,
+	theme-pink: $primary-pink,
+	theme-magenta: $primary-magenta,
+	theme-charcoal: $primary-charcoal
+) !default;
+
+/* Loop through and build out the color schemes */
+@each $theme, $color in $themes {
+	@include theme( $theme, $color );
+}

@@ -1,0 +1,35 @@
+
+/* Searchbar
+----------------------------------------------- */
+
+#searchbar,
+.searchbar-shortcode {
+	.search-form {
+		margin-top: 1rem;
+	}
+
+	.button {
+		text-transform: uppercase;
+	}
+}
+
+#searchbar {
+	.content-wrap {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		margin-bottom: 0;
+	}
+}
+
+.searchbar-shortcode {
+	background: rgba(0, 0, 0, 0.35);
+
+	select,
+	[type='text'],
+	[type='search'] {
+		background-color: $white;
+		&::placeholder {
+			color: $suva-grey;
+		}
+	}
+}

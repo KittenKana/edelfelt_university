@@ -1,0 +1,32 @@
+
+/* Button mixins
+ ----------------------------------------------- */
+
+@mixin app-button( $name, $color ) {
+	$color-hover: darken( $color, 5% );
+
+	.button.#{$name} {
+		background-color: $color;
+
+		&:hover,
+		&:focus {
+			background-color: $color-hover;
+		}
+	}
+}
+
+@mixin app-button-hollow( $name, $color ) {
+	$color-hover: darken( $color, 5% );
+
+	.button.hollow.#{$name} {
+		border-color: $color;
+		color: $color;
+
+		&:hover,
+		&:focus {
+			background-color: $color-hover;
+			border-color: $color-hover;
+			color: $button-color;
+		}
+	}
+}

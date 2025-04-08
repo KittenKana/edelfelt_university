@@ -1,0 +1,92 @@
+/* Set any animations here */
+
+/* loader used for google maps, etc */
+.spinner {
+	margin: 0 auto;
+	width: 50px;
+	height: 30px;
+	text-align: center;
+	font-size: 10px;
+}
+
+.spinner > div {
+	background-color: $matterhorn;
+	height: 100%;
+	width: 6px;
+	display: inline-block;
+	animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+	animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+	animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+	animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+	animation-delay: -0.8s;
+}
+
+@keyframes stretchdelay {
+	0%,
+	40%,
+	100% {
+		transform: scaleY(0.4);
+	}  20% {
+		transform: scaleY(1.0);
+	}
+}
+
+/* typed.js blinking cursor */
+.typed-cursor {
+	opacity: 1;
+	animation: blink 0.7s infinite;
+}
+@keyframes blink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-webkit-keyframes blink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-moz-keyframes blink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

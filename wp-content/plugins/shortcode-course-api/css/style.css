@@ -1,0 +1,116 @@
+.course-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-family: sans-serif;
+}
+
+.course-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.course-code-box {
+    font-weight: bold;
+    border: 2px solid #000;
+    padding: 8px 12px;
+    text-align: center;
+    border-radius: 6px;
+    width: 95px;
+}
+
+.course-code-box div:first-child {
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.course-code-box div:last-child {
+    font-size: 1.2rem;
+}
+
+.course-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-meta .term {
+    color: #0080ff;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.course-meta .title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.course-meta .desc {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.course-credits {
+    font-weight: bold;
+    border: 2px solid #444;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.course-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.course-card-content {
+    flex-grow: 1;
+}
+
+.course-department {
+    font-weight: bold;
+    font-size: 14px;
+    color: #222;
+    display: block;
+}
+
+.course-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 4px 0;
+}
+
+.course-description {
+    font-size: 14px;
+    color: #666;
+}
+
+.course-credits {
+    font-weight: bold;
+    border: 2px solid #555;
+    border-radius: 9999px;
+    padding: 6px 12px;
+    margin-right: 8px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+#search-results, #cart-results {
+    margin-top: 1rem;
+}
+

@@ -1,0 +1,6 @@
+[submodule "scb-appthemes"]
+	path = scb-appthemes
+	url = git@github.com:AppThemes/wp-scb-framework.git
+[submodule "p2p-core-appthemes"]
+	path = p2p-core-appthemes
+	url = git@github.com:AppThemes/wp-lib-posts-to-posts.git

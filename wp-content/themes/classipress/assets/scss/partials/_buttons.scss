@@ -1,0 +1,104 @@
+
+/* Buttons
+----------------------------------------------- */
+
+/* Setup the map */
+$buttons: (
+	primary: $primary-color,
+	secondary: $secondary-color,
+	success: $success-color,
+	info: $info-color,
+	warning: $warning-color,
+	alert: $alert-color,
+) !default;
+
+/*
+Hack needed to apply button class style to plugins, etc so it
+matches the theme's look
+ */
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+	@include button(false, $primary-color, darken( $primary-color, 5% ), $button-color);
+}
+
+/* Build out the buttons */
+@each $button, $color in $buttons {
+	@include app-button( $button, $color );
+}
+
+@include breakpoint(small only) {
+	.button.large {
+		font-size: map-get($button-sizes, small);
+	}
+}
+
+/* Build out the hollow buttons */
+@each $button, $color in $buttons {
+	@include app-button-hollow( $button, $color );
+}
+
+
+/* Bootstrap buttons just in case */
+
+.btn {
+	display: inline-block;
+	padding: 0.375rem 1rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	user-select: none;
+	border: 1px solid rgba(0, 0, 0, 0);
+	border-radius: 0.25rem;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+.btn-group-sm > .btn,
+.btn-sm {
+	padding: 0.25rem 0.75rem;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	border-radius: 0.2rem;
+}
+
+a.btn-white {
+	color: $suva-grey;
+	background: #FFF;
+	border: 1px solid #E7EAEC;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: inherit;
+		border: 1px solid #D2D2D2;
+	}
+}
+
+
+/* Footer back to top button */
+
+#topcontrol {
+	color: #FFF;
+	text-align: center;
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	border: none;
+	border-radius: 4px;
+	background-clip: padding-box;
+	transition: background-color 0.25s ease-out, color 0.25s ease-out;
+}
+
+#topcontrol .fa {
+	position: relative;
+	top: 3px;
+	font-size: 25px;
+}
