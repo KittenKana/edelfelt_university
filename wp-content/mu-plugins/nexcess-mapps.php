@@ -3,7 +3,7 @@
  * Plugin Name: Nexcess Managed Apps
  * Plugin URI:  https://www.nexcess.net
  * Description: Functionality to support the Nexcess Managed Apps WordPress and WooCommerce platforms.
- * Version:     1.54.0
+ * Version:     1.55.0
  * Author:      Nexcess
  * Author URI:  https://www.nexcess.net
  * Text Domain: nexcess-mapps
@@ -30,7 +30,7 @@ if ( did_action( 'muplugins_loaded' ) ) {
 }
 
 // The version of the Nexcess Managed Apps plugin.
-define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.54.0' );
+define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.55.0' );
 define( __NAMESPACE__ . '\PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( __NAMESPACE__ . '\PLUGIN_DIR', __DIR__ . '/nexcess-mapps/' );
 define( __NAMESPACE__ . '\VENDOR_DIR', __DIR__ . '/nexcess-mapps/vendor/' );
