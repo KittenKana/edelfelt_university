@@ -27,6 +27,170 @@ add_action('wp_enqueue_scripts', 'kana_course_plugin_enqueue_styles');
 
 
 
+
+
+
+
+
+// === Shortcode: Display Waitlisted Courses ===
+add_shortcode('waitlisted_courses', 'waitlisted_courses_shortcode');
+
+function waitlisted_courses_shortcode() {
+    ob_start();
+    ?>
+    <div id="waitlisted-courses">
+        <h3 style="margin-bottom: 1rem; font-family: sans-serif;">Your Waitlisted Courses</h3>
+        <div id="waitlist-list">Loading...</div>
+    </div>
+
+    <script>
+        jQuery(document).ready(function($) {
+            function fetchWaitlist() {
+                $('#waitlist-list').html('Loading...');
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>',
+                    method: 'POST',
+                    data: {
+                        action: 'get_waitlisted_courses'
+                    },
+                    success: function(response) {
+                        if (response.success && response.courses.length > 0) {
+                            let html = '';
+
+                            response.courses.forEach(course => {
+                                html += `
+                                    <div class="course-card">
+                                        <div class="course-card-content">
+                                            <span class="course-department course-code-box">${course.department} ${course.course_code}</span>
+                                            <div class="course-title" style="margin-top: 10px;">${course.course_name}</div>
+                                            <div class="course-description">${course.description}</div>
+                                            <div class="waitlist-info">Your Position: <strong>${course.waitlist_position}</strong></div>
+                                        </div>
+                                        <button class="remove-waitlist-btn api-btn" data-wl-id="${course.waitlist_id}">Remove from Waitlist</button>
+                                    </div>`;
+                            });
+
+                            $('#waitlist-list').html(html);
+                        } else {
+                            $('#waitlist-list').html('<p style="font-family: sans-serif;">You are not waitlisted for any courses.</p>');
+                        }
+                    },
+                    error: function() {
+                        $('#waitlist-list').html('<p style="font-family: sans-serif;">Failed to load waitlisted courses.</p>');
+                    }
+                });
+            }
+
+            fetchWaitlist();
+
+            $(document).on('click', '.remove-waitlist-btn', function() {
+                const wlId = $(this).data('wl-id');
+                if (!confirm('Are you sure you want to remove this course from your waitlist?')) return;
+
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>',
+                    method: 'POST',
+                    data: {
+                        action: 'remove_from_waitlist',
+                        waitlist_id: wlId
+                    },
+                    success: function(response) {
+                        alert(response.message);
+                        if (response.success) {
+                            fetchWaitlist();
+                        }
+                    },
+                    error: function() {
+                        alert('Error trying to remove from waitlist.');
+                    }
+                });
+            });
+        });
+    </script>
+    <?php
+    return ob_get_clean();
+}
+
+// === AJAX: Fetch Waitlisted Courses ===
+add_action('wp_ajax_get_waitlisted_courses', 'handle_get_waitlisted_courses');
+function handle_get_waitlisted_courses() {
+    session_start();
+
+    if (!isset($_SESSION['student_id'])) {
+        wp_send_json(['success' => false, 'message' => 'Not logged in']);
+    }
+
+    $student_id = intval($_SESSION['student_id']);
+    $response = wp_remote_get(home_url("/wp-json/course-api/v1/waitlist/{$student_id}"));
+
+    if (is_wp_error($response)) {
+        wp_send_json(['success' => false, 'message' => 'Error contacting server']);
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $waitlisted_courses = json_decode($body, true);
+
+    if (!is_array($waitlisted_courses)) {
+        wp_send_json(['success' => true, 'courses' => []]);
+    }
+
+    wp_send_json(['success' => true, 'courses' => $waitlisted_courses]);
+}
+
+// === AJAX: Remove From Waitlist ===
+add_action('wp_ajax_remove_from_waitlist', 'handle_remove_from_waitlist');
+function handle_remove_from_waitlist() {
+    session_start();
+
+    if (!isset($_SESSION['student_id'])) {
+        wp_send_json(['success' => false, 'message' => 'Not logged in']);
+    }
+
+    $waitlist_id = intval($_POST['waitlist_id'] ?? 0);
+    if (!$waitlist_id) {
+        wp_send_json(['success' => false, 'message' => 'Invalid waitlist ID']);
+    }
+
+    $response = wp_remote_post(home_url('/wp-json/course-api/v1/waitlist/remove'), [
+        'body'    => json_encode(['waitlist_id' => $waitlist_id]),
+        'headers' => ['Content-Type' => 'application/json'],
+    ]);
+
+    if (is_wp_error($response)) {
+        wp_send_json(['success' => false, 'message' => 'Server error']);
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $result = json_decode($body, true);
+
+    if (!empty($result['success'])) {
+        wp_send_json(['success' => true, 'message' => 'Removed from waitlist']);
+    } else {
+        wp_send_json(['success' => false, 'message' => 'Failed to remove from waitlist']);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function display_registration_form() {
     ob_start();
 
@@ -451,44 +615,49 @@ function render_course_browser_ui() {
             });
         }
 
-        function searchCourses() {
-            const keyword = $('#search-keyword').val();
-            const department = $('#search-department').val();
+function searchCourses() {
+    const keyword = $('#search-keyword').val();
+    const department = $('#search-department').val();
 
-            $.get('/wp-json/course-api/v1/courses/search', {
-                keyword,
-                department
-            }, function(data) {
-                if (!data || data.length === 0) {
-                    $('#search-results').html('<p>No matching courses found.</p>');
-                    return;
-                }
-
-                const html = data.map(course => {
-                    const available = course.capacity - course.seats_filled;
-                    const disabled = available <= 0 ? 'disabled' : '';
-                    const notice = available <= 0 ? '<span style="color: red;">(Full)</span>' : '';
-
-                    return `
-                    <div class="course-card">
-                        <div class="course-card-content">
-                            <span class="course-department">${course.department || ''} ${course.course_code}</span>
-                            <div class="course-title">${course.course_name}</div>
-                            <div class="course-description">${course.description}</div>
-                            <div class="course-description">Available Seats: ${available} ${notice}</div>
-                        </div>
-                        <div>
-                            <div class="course-credits">${course.credits} Credits</div>
-                            <button class="add-to-cart api-btn" data-course-id="${course.course_id}" ${disabled}>Add to Cart</button>
-                        </div>
-                    </div>`;
-                }).join('');
-
-                $('#search-results').html(html);
-            });
+    $.get('/wp-json/course-api/v1/courses/search', {
+        keyword,
+        department
+    }, function(data) {
+        if (!data || data.length === 0) {
+            $('#search-results').html('<p>No matching courses found.</p>');
+            return;
         }
 
+        const html = data.map(course => {
+            const available = course.capacity - course.seats_filled;
+            const isFull = available <= 0;
+            const notice = isFull ? '<span style="color: red;">(Full)</span>' : '';
+            const waitlistButton = isFull
+                ? `<button class="add-to-waitlist api-btn" data-course-id="${course.course_id}">Add to Waitlist</button>`
+                : '';
+            const addToCartButton = !isFull
+                ? `<button class="add-to-cart api-btn" data-course-id="${course.course_id}">Add to Cart</button>`
+                : '';
 
+            return `
+            <div class="course-card">
+                <div class="course-card-content">
+                    <span class="course-department">${course.department || ''} ${course.course_code}</span>
+                    <div class="course-title">${course.course_name}</div>
+                    <div class="course-description">${course.description}</div>
+                    <div class="course-description">Available Seats: ${available} ${notice}</div>
+                </div>
+                <div>
+                    <div class="course-credits">${course.credits} Credits</div>
+                    ${addToCartButton}
+                    ${waitlistButton}
+                </div>
+            </div>`;
+        }).join('');
+
+        $('#search-results').html(html);
+            });
+        }
 
 function registerForCourses() {
     $.get('/wp-json/course-api/v1/cart/' + studentId, function(courses) {
@@ -841,41 +1010,114 @@ function add_course_to_cart() {
 add_shortcode('add_to_cart', 'add_course_to_cart');
 
 // Register for Course Shortcode
-function register_for_course_shortcode() {
-    if (!isset($_SESSION['student_id'])) {
-        return 'Please log in first.';
-    }
-
-    if (isset($_POST['course_id'])) {
-        $student_id = $_SESSION['student_id'];
-        $course_id = sanitize_text_field($_POST['course_id']);
-
-        $response = wp_remote_post(home_url('/wp-json/course-api/v1/register'), [
-            'body' => json_encode(['student_id' => $student_id, 'course_id' => $course_id]),
-            'headers' => ['Content-Type' => 'application/json'],
-        ]);
-
-        $body = wp_remote_retrieve_body($response);
-        $result = json_decode($body, true);
-
-        if (isset($result['success']) && $result['success']) {
-            return 'Successfully registered for the course!';
-        } else {
-            return 'Failed to register for the course.';
-        }
-    }
-
+function register_courses_shortcode() {
     ob_start();
     ?>
-    <form method="POST" action="#">
-        <label for="course_id">Course ID:</label>
-        <input type="text" id="course_id" name="course_id" required><br>
-        <button type="submit" class="api-btn">Register for Course</button>
-    </form>
+    <div id="course-registration">
+        <h3 style="margin-bottom: 1rem; font-family: sans-serif;">Available Courses</h3>
+        <div id="course-list">Loading...</div>
+    </div>
+
+    <script>
+        jQuery(document).ready(function($) {
+            function fetchCourses() {
+                $('#course-list').html('Loading...');
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>',
+                    method: 'POST',
+                    data: {
+                        action: 'get_available_courses'
+                    },
+                    success: function(response) {
+                        if (response.success && response.courses.length > 0) {
+                            let html = '';
+                            response.courses.forEach(course => {
+                                html += `
+                                    <div class="course-card">
+                                        <div class="course-card-content">
+                                            <span class="course-department course-code-box">${course.department} ${course.course_code}</span>
+                                            <div class="course-title" style="margin-top: 10px;">${course.course_name}</div>
+                                            <div class="course-description">${course.description}</div>
+                                            <div class="course-availability">Available Spots: <strong>${course.available_spots}</strong></div>
+                                        </div>`;
+
+                                // If the course is full, display "Add to Waitlist" button
+                                if (course.available_spots <= 0) {
+                                    html += `
+                                        <button class="add-to-waitlist-btn api-btn" data-course-id="${course.course_id}">Add to Waitlist</button>
+                                    `;
+                                } else {
+                                    html += `
+                                        <button class="register-btn api-btn" data-course-id="${course.course_id}">Register</button>
+                                    `;
+                                }
+                                
+                                html += `</div>`;
+                            });
+
+                            $('#course-list').html(html);
+                        } else {
+                            $('#course-list').html('<p style="font-family: sans-serif;">No courses available at the moment.</p>');
+                        }
+                    },
+                    error: function() {
+                        $('#course-list').html('<p style="font-family: sans-serif;">Failed to load courses.</p>');
+                    }
+                });
+            }
+
+            fetchCourses();
+
+            // Add to Waitlist button click event
+            $(document).on('click', '.add-to-waitlist-btn', function() {
+                const courseId = $(this).data('course-id');
+                if (!confirm('Are you sure you want to add this course to your waitlist?')) return;
+
+                $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php"); ?>',
+                    method: 'POST',
+                    data: {
+                        action: 'add_to_waitlist',
+                        course_id: courseId
+                    },
+                    success: function(response) {
+                        alert(response.message);
+                    },
+                    error: function() {
+                        alert('Error trying to add to waitlist.');
+                    }
+                });
+            });
+        });
+    </script>
     <?php
     return ob_get_clean();
 }
-add_shortcode('register_course', 'register_for_course_shortcode');
+
+add_action('wp_ajax_add_to_waitlist', 'handle_add_to_waitlist');
+function handle_add_to_waitlist() {
+    session_start();
+
+    if (!isset($_SESSION['student_id'])) {
+        wp_send_json(['success' => false, 'message' => 'Not logged in']);
+    }
+
+    $course_id = intval($_POST['course_id'] ?? 0);
+    if (!$course_id) {
+        wp_send_json(['success' => false, 'message' => 'Invalid course ID']);
+    }
+
+    // Assume you have a function that adds the student to the waitlist
+    $result = add_student_to_waitlist($course_id, $_SESSION['student_id']);
+
+    if ($result) {
+        wp_send_json(['success' => true, 'message' => 'Added to waitlist']);
+    } else {
+        wp_send_json(['success' => false, 'message' => 'Failed to add to waitlist']);
+    }
+}
+
+
 
 // Logout Button Shortcode
 function display_logout_button() {
