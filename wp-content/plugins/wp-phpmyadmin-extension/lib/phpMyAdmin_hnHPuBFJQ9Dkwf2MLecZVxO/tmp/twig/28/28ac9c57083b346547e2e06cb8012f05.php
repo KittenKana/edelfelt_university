@@ -278,6 +278,6 @@ $context["foreign_column"]]));
 
     public function getSourceContext()
     {
-        return new Source("", "table/relation/foreign_key_row.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/relation/foreign_key_row.twig");
+        return new Source("", "table/relation/foreign_key_row.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/relation/foreign_key_row.twig");
     }
 }

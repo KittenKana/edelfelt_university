@@ -60,6 +60,6 @@ class __TwigTemplate_f86f7b236107c7e64a4d9d3b29051a25 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "table/insert/get_html_for_insert_edit_form_header.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/insert/get_html_for_insert_edit_form_header.twig");
+        return new Source("", "table/insert/get_html_for_insert_edit_form_header.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/insert/get_html_for_insert_edit_form_header.twig");
     }
 }

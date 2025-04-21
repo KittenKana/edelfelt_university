@@ -638,6 +638,6 @@ echo _gettext("Binary - do not edit");
 
     public function getSourceContext()
     {
-        return new Source("", "table/insert/column_row.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/insert/column_row.twig");
+        return new Source("", "table/insert/column_row.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/insert/column_row.twig");
     }
 }

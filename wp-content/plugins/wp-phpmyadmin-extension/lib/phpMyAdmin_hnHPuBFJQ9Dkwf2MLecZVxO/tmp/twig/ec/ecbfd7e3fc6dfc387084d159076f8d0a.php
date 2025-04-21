@@ -308,6 +308,6 @@ class __TwigTemplate_9c3f4dfb5c9b31b43f38d25831a9c365 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "table/search/input_box.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/search/input_box.twig");
+        return new Source("", "table/search/input_box.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/search/input_box.twig");
     }
 }

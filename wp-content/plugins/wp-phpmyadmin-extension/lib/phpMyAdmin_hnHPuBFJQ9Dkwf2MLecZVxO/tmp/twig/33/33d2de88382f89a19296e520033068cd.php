@@ -114,6 +114,6 @@ class __TwigTemplate_792a41a41a6a9fd2f56b8011ad6349ba extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "table/insert/continue_insertion_form.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/insert/continue_insertion_form.twig");
+        return new Source("", "table/insert/continue_insertion_form.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/insert/continue_insertion_form.twig");
     }
 }

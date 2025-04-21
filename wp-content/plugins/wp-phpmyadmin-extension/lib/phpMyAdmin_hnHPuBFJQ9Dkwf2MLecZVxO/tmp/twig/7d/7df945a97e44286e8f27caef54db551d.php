@@ -115,6 +115,6 @@ class __TwigTemplate_81942d2f2e1617c3a3fb4ff006dc39a3 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "columns_definitions/column_attribute.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/columns_definitions/column_attribute.twig");
+        return new Source("", "columns_definitions/column_attribute.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/columns_definitions/column_attribute.twig");
     }
 }

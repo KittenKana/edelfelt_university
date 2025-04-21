@@ -26,8 +26,8 @@ $cfg['Servers'][$i]['auth_type']	= 'signon'; //cookie | signon | ...
 //$cfg['LoginCookieValidity']			= 14400;
 $cfg['Servers'][$i]['SignonSession']= 'SignonSession';
 $cfg['SessionSavePath'] = sys_get_temp_dir(); $cfg['Servers'][$i]['SessionSavePath'] = $cfg['SessionSavePath'];
-$cfg['Servers'][$i]['SignonURL']    = 'https://fb3eebd0c9.nxcli.io/wp-admin/?rand=45224456&goto_wp_phpmyadmin=1';
-$cfg['Servers'][$i]['LogoutURL']    = 'https://fb3eebd0c9.nxcli.io/wp-admin/?rand=74682301&pma_logout=1';
+$cfg['Servers'][$i]['SignonURL']    = 'https://reg-fb3eebd0c9.nxcli.io/wp-admin/?rand=45224456&goto_wp_phpmyadmin=1';
+$cfg['Servers'][$i]['LogoutURL']    = 'https://reg-fb3eebd0c9.nxcli.io/wp-admin/?rand=74682301&pma_logout=1';
 //$cfg['Servers'][$i]['user']		= 'User for config authDocumentation Leave empty if not using config auth.';
 //$cfg['Servers'][$i]['password']	= 'Password for config authDocumentation Leave empty if not using config auth.';
 $cfg['Servers'][$i]['DisableIS']	= true;  //disable information schema

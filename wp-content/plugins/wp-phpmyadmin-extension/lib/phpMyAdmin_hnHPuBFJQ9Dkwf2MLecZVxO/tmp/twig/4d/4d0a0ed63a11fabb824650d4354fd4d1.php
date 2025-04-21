@@ -200,6 +200,6 @@ echo _gettext("Start auto refresh");
 
     public function getSourceContext()
     {
-        return new Source("", "server/status/processes/index.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/server/status/processes/index.twig");
+        return new Source("", "server/status/processes/index.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/server/status/processes/index.twig");
     }
 }

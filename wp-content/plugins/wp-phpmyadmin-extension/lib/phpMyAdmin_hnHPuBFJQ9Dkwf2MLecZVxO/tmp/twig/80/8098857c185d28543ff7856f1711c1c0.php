@@ -186,6 +186,6 @@ echo _gettext("Event");
 
     public function getSourceContext()
     {
-        return new Source("", "database/triggers/list.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/database/triggers/list.twig");
+        return new Source("", "database/triggers/list.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/database/triggers/list.twig");
     }
 }

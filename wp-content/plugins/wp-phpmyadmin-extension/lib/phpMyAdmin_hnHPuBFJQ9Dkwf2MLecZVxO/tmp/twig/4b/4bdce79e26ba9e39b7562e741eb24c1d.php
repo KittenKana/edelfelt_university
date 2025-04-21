@@ -64,6 +64,6 @@ class __TwigTemplate_835f6c24348e7a7b870597b5510064e4 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "table/search/column_comparison_operators.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/search/column_comparison_operators.twig");
+        return new Source("", "table/search/column_comparison_operators.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/search/column_comparison_operators.twig");
     }
 }

@@ -85,6 +85,6 @@ class __TwigTemplate_e29ec423a3c7626131e5ebb1ec9c231e extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "table/relation/dropdown_generate.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/relation/dropdown_generate.twig");
+        return new Source("", "table/relation/dropdown_generate.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/table/relation/dropdown_generate.twig");
     }
 }

@@ -68,6 +68,6 @@ class __TwigTemplate_e6d6888e904e8cc32924322a8220a194 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "display/results/null_display.twig", "/chroot/home/a6a9dc03/fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/display/results/null_display.twig");
+        return new Source("", "display/results/null_display.twig", "/chroot/home/a6a56c84/reg-fb3eebd0c9.nxcli.io/html/wp-content/plugins/wp-phpmyadmin-extension/lib/phpMyAdmin_hnHPuBFJQ9Dkwf2MLecZVxO/templates/display/results/null_display.twig");
     }
 }
