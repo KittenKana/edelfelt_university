@@ -629,6 +629,7 @@ function searchCourses() {
         }
 
         const html = data.map(course => {
+	    console.log("Search Result Course:", course);
             const available = course.capacity - course.seats_filled;
             const isFull = available <= 0;
             const notice = isFull ? '<span style="color: red;">(Full)</span>' : '';
