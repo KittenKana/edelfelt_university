@@ -18,7 +18,7 @@ global $cp_options;
 			<?php appthemes_advertise_header(); ?>
             -->
             <!--
-            <img src="https://fb3eebd0c9.nxcli.io/wp-content/uploads/2025/04/cropped-cropped-cropped-edelfelt_cropped.png" >
+            <img src="https://reg-fb3eebd0c9.nxcli.io/wp-content/uploads/2025/04/cropped-cropped-cropped-edelfelt_cropped.png" >
             -->
 
 		</div>
