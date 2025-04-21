@@ -1,6 +1,6 @@
 <?php
 /**
- * Cache Enabler settings for https://fb3eebd0c9.nxcli.io
+ * Cache Enabler settings for https://reg-fb3eebd0c9.nxcli.io
  *
  * @since      1.5.0
  * @change     1.5.0
