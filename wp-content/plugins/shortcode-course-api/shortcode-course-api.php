@@ -26,12 +26,6 @@ function kana_course_plugin_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'kana_course_plugin_enqueue_styles');
 
 
-
-
-
-
-
-
 // === Shortcode: Display Waitlisted Courses ===
 add_shortcode('waitlisted_courses', 'waitlisted_courses_shortcode');
 
@@ -169,26 +163,6 @@ function handle_remove_from_waitlist() {
         wp_send_json(['success' => false, 'message' => 'Failed to remove from waitlist']);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function display_registration_form() {
@@ -476,8 +450,8 @@ function handle_unregister_course() {
     }
 }
 
-// === Shortcode: Display Registered Courses ===
 add_shortcode('registered_courses', 'registered_courses_shortcode');
+// === Shortcode: Display Registered Courses ===
 function registered_courses_shortcode() {
     ob_start();
     ?>
@@ -501,17 +475,23 @@ function registered_courses_shortcode() {
                             let html = '';
 
                             response.courses.forEach(course => {
-                                html += `
-                                    <div class="course-card">
+                                html += ` 
+                                    <div class="course-card" id="course-${course.registration_id}">
                                         <div class="course-card-content">
                                             <span class="course-department course-code-box">${course.department} ${course.course_code}</span>
-                                            
-					    <div style="margin-top: 10px" class="course-title">${course.course_name}</div>
+                                            <div style="margin-top: 10px" class="course-title">${course.course_name}</div>
                                             <div class="course-description">${course.description}</div>
                                         </div>
-                                        <button class="unregister-btn api-btn" data-reg-id="${course.registration_id}">Unregister</button>
+                                        <div style="margin-top: 10px;">
+                                            <button id="mark-comp" class="mark-complete-btn unregister-btn api-btn" data-reg-id="${course.registration_id}">Mark Completed</button>
+                                            <button class="unregister-btn api-btn" data-reg-id="${course.registration_id}">Unregister</button>
+                                        </div>
                                     </div>`;
                             });
+
+                            if (html === '') {
+                                html = '<p style="font-family: sans-serif;">No registered courses found.</p>';
+                            }
 
                             $('#courses-list').html(html);
                         } else {
@@ -548,6 +528,34 @@ function registered_courses_shortcode() {
                     }
                 });
             });
+
+            $(document).on('click', '.mark-complete-btn', function() {
+                const regId = $(this).data('reg-id');
+                const studentId = <?php echo get_current_user_id(); ?>; // Get the current student ID dynamically
+
+                $.ajax({
+                    url: '<?php echo esc_url(rest_url('course-api/v1/mark-completed')); ?>',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        registration_id: regId,
+                        student_id: studentId // Pass student_id along with registration_id
+                    }),
+                    success: function(response) {
+                        alert(response.message || 'Marked as completed!');
+                        
+                        // Hide the course card that was marked as completed without reloading the list
+                        $(`#course-${regId}`).fadeOut();
+                    },
+                    error: function(xhr) {
+                        let msg = 'Failed to mark course as completed.';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            msg = xhr.responseJSON.message;
+                        }
+                        alert(msg);
+                    }
+                });
+            });
         });
     </script>
     <?php
@@ -556,9 +564,7 @@ function registered_courses_shortcode() {
 
 
 add_shortcode('course_browser', 'render_course_browser_ui');
-
 function render_course_browser_ui() {
-
     if (!isset($_SESSION['student_id'])) {
         return 'Please log in first.';
     }
@@ -587,7 +593,6 @@ function render_course_browser_ui() {
     <script>
     (function($) {
         const studentId = <?php echo json_encode($student_id); ?>;
-        console.log('Student ID:', studentId); // This will print the student ID to the browser console
 
         function fetchCart() {
             $.get('/wp-json/course-api/v1/cart/' + studentId, function(data) {
@@ -595,7 +600,7 @@ function render_course_browser_ui() {
                     $('#cart-results').html('<p>Your cart is empty.</p>');
                     return;
                 }
-
+                
                 const html = data.map(course => `
                 <div class="course-card">
                     <div class="course-card-content">
@@ -628,96 +633,134 @@ function searchCourses() {
             return;
         }
 
-        const html = data.map(course => {
-	    console.log("Search Result Course:", course);
-            const available = course.capacity - course.seats_filled;
-            const isFull = available <= 0;
-            const notice = isFull ? '<span style="color: red;">(Full)</span>' : '';
-            const waitlistButton = isFull
-                ? `<button class="add-to-waitlist api-btn" data-course-id="${course.course_id}">Add to Waitlist</button>`
-                : '';
-            const addToCartButton = !isFull
-                ? `<button class="add-to-cart api-btn" data-course-id="${course.course_id}">Add to Cart</button>`
-                : '';
+        console.log('Courses found:', data);  // Debugging courses data
 
-            return `
-            <div class="course-card">
-                <div class="course-card-content">
-                    <span class="course-department">${course.department || ''} ${course.course_code}</span>
-                    <div class="course-title">${course.course_name}</div>
-                    <div class="course-description">${course.description}</div>
-                    <div class="course-description">Available Seats: ${available} ${notice}</div>
-                </div>
-                <div>
-                    <div class="course-credits">${course.credits} Credits</div>
-                    ${addToCartButton}
-                    ${waitlistButton}
-                </div>
-            </div>`;
-        }).join('');
+        // First, get completed courses for the current student
+        $.get('/wp-json/course-api/v1/completed-courses/' + studentId, function(completedCourses) {
 
-        $('#search-results').html(html);
+            // Map completed courses to a lookup object using course_id as key
+            const completedCourseLookup = completedCourses.reduce((acc, course) => {
+                const completedStatus = course.completed === "1";  // Convert "1" to true and "0" to false
+                acc[course.course_id] = completedStatus;
+                return acc;
+            }, {});
+
+            const courseHtmlPromises = data.map(course => {
+                const available = course.capacity - course.seats_filled;
+                const isFull = available <= 0;
+                const notice = isFull ? '<span style="color: red;">(Full)</span>' : '';
+                const waitlistButton = isFull
+                    ? `<button class="add-to-waitlist api-btn" data-course-id="${course.course_id}">Add to Waitlist</button>`
+                    : '';
+                const addToCartButton = !isFull
+                    ? `<button class="add-to-cart api-btn" data-course-id="${course.course_id}">Add to Cart</button>`
+                    : '';
+
+                console.log(`Processing course: ${course.course_name}, Available seats: ${available}`);  // Debugging each course's available seats
+
+                // Fetch prerequisites for this course
+                return $.get('/wp-json/course-api/v1/prerequisites/' + course.course_id).then(prereqs => {
+                    console.log(`Prerequisites for course ${course.course_name}:`, prereqs);  // Debugging fetched prerequisites
+
+                    let prereqHTML = '';
+                    if (prereqs.length > 0) {
+                        const formatted = prereqs.map(pr => {
+                            const isCompleted = completedCourseLookup[pr.prerequisite_course_id] === true;  // Use completed field directly
+
+                            const icon = isCompleted
+                                ? '<span class="course-description" style="color:green;">✅</span>'  // Completed
+                                : '<span class="course-description" style="color:red;">❌</span>';  // Not completed
+                            return `<li>${icon} <span class="course-description"> ${pr.department} ${pr.course_code}: ${pr.course_name} </span> </li>`;
+                        }).join('');  // Format the prerequisites list
+                        prereqHTML = `<div><strong>Prerequisites:</strong><ul>${formatted}</ul></div>`;
+                    }
+
+                    return `
+                    <div class="course-card">
+                        <div class="course-card-content">
+                            <span class="course-department">${course.department || ''} ${course.course_code}</span>
+                            <div class="course-title">${course.course_name}</div>
+                            <div class="course-description">${course.description}</div>
+                            <div class="course-description">Available Seats: ${available} ${notice}</div>
+                            ${prereqHTML}  <!-- Add prerequisites if available -->
+                        </div>
+                        <div>
+                            <div class="course-credits">${course.credits} Credits</div>
+                            ${addToCartButton}
+                            ${waitlistButton}
+                        </div>
+                    </div>`;
+                });
             });
-        }
 
-function registerForCourses() {
-    $.get('/wp-json/course-api/v1/cart/' + studentId, function(courses) {
-        if (!courses || courses.length === 0) {
-            alert('No courses to register for!');
-            return;
-        }
-
-        let successful = [];
-        let failed = [];
-
-        const registerNext = (index) => {
-            if (index >= courses.length) {
-                fetchCart();
-
-                const summary = `
-                    <h4>Registration Summary</h4>
-                    <p>✅ Registered: ${successful.length}</p>
-                    <ul>${successful.map(c => `<li>${c}</li>`).join('')}</ul>
-                    ${failed.length > 0 ? `<p>❌ Failed: ${failed.length}</p><ul>${failed.map(c => `<li>${c}</li>`).join('')}</ul>` : ''}
-                `;
-                $('#registration-confirmation').html(summary);
-                return;
-            }
-
-            const course = courses[index];
-            const available = (course.capacity || 0) - (course.seats_filled || 0);
-
-            if (available <= 0) {
-                failed.push(`${course.course_code}: ${course.course_name} (Full)`);
-                registerNext(index + 1);
-                return;
-            }
-
-            $.ajax({
-                url: '/wp-json/course-api/v1/register',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    student_id: studentId,
-                    course_id: course.course_id
-                }),
-                success: function() {
-                    successful.push(`${course.course_code}: ${course.course_name}`);
-                    registerNext(index + 1);
-                },
-                error: function(jqXHR) {
-                    const msg = jqXHR.responseJSON?.message || 'Error';
-                    failed.push(`${course.course_code}: ${course.course_name} (${msg})`);
-                    registerNext(index + 1);
-                }
+            // Wait for all promises to resolve and then inject the full HTML
+            Promise.all(courseHtmlPromises).then(allHtml => {
+                console.log('All course HTML:', allHtml);  // Debugging final HTML for all courses
+                $('#search-results').html(allHtml.join(''));
             });
-        };
-
-        registerNext(0);
+        });
     });
 }
 
-        // Event handlers
+
+        function registerForCourses() {
+            $.get('/wp-json/course-api/v1/cart/' + studentId, function(courses) {
+                if (!courses || courses.length === 0) {
+                    alert('No courses to register for!');
+                    return;
+                }
+
+                let successful = [];
+                let failed = [];
+
+                const registerNext = (index) => {
+                    if (index >= courses.length) {
+                        fetchCart();
+
+                        const summary = `
+                            <h4>Registration Summary</h4>
+                            <p>✅ Registered: ${successful.length}</p>
+                            <ul>${successful.map(c => `<li>${c}</li>`).join('')}</ul>
+                            ${failed.length > 0 ? `<p>❌ Failed: ${failed.length}</p><ul>${failed.map(c => `<li>${c}</li>`).join('')}</ul>` : ''}
+                        `;
+                        $('#registration-confirmation').html(summary);
+                        return;
+                    }
+
+                    const course = courses[index];
+                    const available = (course.capacity || 0) - (course.seats_filled || 0);
+
+                    if (available <= 0) {
+                        failed.push(`${course.course_code}: ${course.course_name} (Full)`);
+                        registerNext(index + 1);
+                        return;
+                    }
+
+                    $.ajax({
+                        url: '/wp-json/course-api/v1/register',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            student_id: studentId,
+                            course_id: course.course_id
+                        }),
+                        success: function() {
+                            successful.push(`${course.course_code}: ${course.course_name}`);
+                            registerNext(index + 1);
+                        },
+                        error: function(jqXHR) {
+                            const msg = jqXHR.responseJSON?.message || 'Error';
+                            failed.push(`${course.course_code}: ${course.course_name} (${msg})`);
+                            registerNext(index + 1);
+                        }
+                    });
+                };
+
+                registerNext(0);
+            });
+        }
+
+        // --- Event handlers ---
         $(document).on('click', '#search-btn', searchCourses);
 
         $(document).on('click', '.add-to-cart', function() {
@@ -727,9 +770,7 @@ function registerForCourses() {
                 course_id: courseId
             }, function(response) {
                 alert(response.message || 'Added!');
-
-		document.dispatchEvent(new Event('cart-updated'));
-
+                document.dispatchEvent(new Event('cart-updated'));
                 fetchCart();
             }).fail(err => {
                 alert(err.responseJSON?.message || 'Failed to add.');
@@ -742,16 +783,37 @@ function registerForCourses() {
                 cart_id: cartId
             }, function(response) {
                 alert(response.message || 'Removed!');
-                
-		document.dispatchEvent(new Event('cart-updated'));
-
-		fetchCart();
+                document.dispatchEvent(new Event('cart-updated'));
+                fetchCart();
             }).fail(err => {
                 alert(err.responseJSON?.message || 'Failed to remove.');
             });
         });
 
         $(document).on('click', '#register-btn', registerForCourses);
+
+        // ✅ Add-to-waitlist handler
+        $(document).on('click', '.add-to-waitlist', function() {
+            const courseId = $(this).data('course-id');
+
+            $.ajax({
+                url: '/wp-json/course-api/v1/waitlist/add',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    student_id: studentId,
+                    course_id: courseId
+                }),
+                success: function(response) {
+                    alert(response.message || 'You’ve been added to the waitlist.');
+                    document.dispatchEvent(new Event('cart-updated'));
+                },
+                error: function(jqXHR) {
+                    const msg = jqXHR.responseJSON?.message || 'Failed to join waitlist.';
+                    alert(msg);
+                }
+            });
+        });
 
         $(document).ready(function() {
             fetchCart();
@@ -762,7 +824,6 @@ function registerForCourses() {
     <?php
     return ob_get_clean();
 }
-
 
 function add_to_cart_button($atts) {
     if (!isset($_SESSION['student_id'])) {
