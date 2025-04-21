@@ -901,54 +901,137 @@ function get_completed_courses($request) {
 
 /**
  * Mark a course as completed for a student
+ * This function allows marking a course as completed even if not registered
+ * by auto-registering the student for the course and marking it completed
  */
 function mark_course_completed($request) {
     global $wpdb;
     
-    $registration_id = $request['registration_id'];
+    // Get parameters from the request
+    $registration_id = isset($request['registration_id']) ? intval($request['registration_id']) : 0;
+    $student_id = isset($request['student_id']) ? intval($request['student_id']) : 0;
+    $course_id = isset($request['course_id']) ? intval($request['course_id']) : 0;
     
-    if (!$registration_id) {
+    // Check if we have either registration_id OR both student_id and course_id
+    if (!$registration_id && (!$student_id || !$course_id)) {
         return new WP_Error(
-            'missing_parameter',
-            'Registration ID is required',
+            'missing_parameters',
+            'Either registration_id or both student_id and course_id are required',
             ['status' => 400]
         );
     }
     
-    // Check if registration exists
-    $registration = $wpdb->get_row(
-        $wpdb->prepare(
-            "SELECT * FROM cr_registration WHERE registration_id = %d",
-            $registration_id
-        )
-    );
-    
-    if (!$registration) {
-        return new WP_Error(
-            'not_found',
-            'Registration not found',
-            ['status' => 404]
+    // If registration_id is provided
+    if ($registration_id) {
+        // Check if registration exists
+        $registration = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM cr_registration WHERE registration_id = %d",
+                $registration_id
+            )
         );
+        
+        if (!$registration) {
+            return new WP_Error(
+                'not_found',
+                'Registration not found',
+                ['status' => 404]
+            );
+        }
+        
+        // Update registration to completed
+        $result = $wpdb->update(
+            "cr_registration",
+            ['completed' => true],
+            ['registration_id' => $registration_id]
+        );
+        
+        if ($result !== false) {
+            return [
+                'success' => true,
+                'message' => 'Course marked as completed',
+                'auto_registered' => false
+            ];
+        } else {
+            return new WP_Error(
+                'update_failed',
+                'Failed to mark course as completed',
+                ['status' => 500]
+            );
+        }
     }
-    
-    // Update registration to completed
-    $result = $wpdb->update(
-        "cr_registration",
-        ['completed' => true],
-        ['registration_id' => $registration_id]
-    );
-    
-    if ($result !== false) {
-        return [
-            'success' => true,
-            'message' => 'Course marked as completed'
-        ];
-    } else {
-        return new WP_Error(
-            'update_failed',
-            'Failed to mark course as completed',
-            ['status' => 500]
+    // If student_id and course_id are provided
+    else {
+        // Check if the student is already registered
+        $existing_reg = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM cr_registration 
+                 WHERE student_id = %d AND course_id = %d AND status = 'confirmed'",
+                $student_id,
+                $course_id
+            )
         );
+        
+        // If registration exists, update it
+        if ($existing_reg) {
+            $updated = $wpdb->update(
+                "cr_registration",
+                ['completed' => true],
+                [
+                    'student_id' => $student_id,
+                    'course_id' => $course_id,
+                    'status' => 'confirmed'
+                ]
+            );
+            
+            if ($updated !== false) {
+                return [
+                    'success' => true,
+                    'message' => 'Course marked as completed',
+                    'auto_registered' => false
+                ];
+            } else {
+                return new WP_Error(
+                    'update_failed',
+                    'Failed to mark course as completed',
+                    ['status' => 500]
+                );
+            }
+        }
+        // If no registration exists, create one
+        else {
+            // Start transaction
+            $wpdb->query('START TRANSACTION');
+            
+            // Insert registration
+            $registration_result = $wpdb->insert(
+                "cr_registration",
+                [
+                    'student_id' => $student_id,
+                    'course_id' => $course_id,
+                    'registration_date' => current_time('mysql'),
+                    'status' => 'confirmed',
+                    'completed' => true
+                ]
+            );
+            
+            // Commit or rollback based on results
+            if ($registration_result) {
+                $wpdb->query('COMMIT');
+                return [
+                    'success' => true,
+                    'message' => 'Course registered and marked as completed',
+                    'auto_registered' => true
+                ];
+            } else {
+                $wpdb->query('ROLLBACK');
+                return new WP_Error(
+                    'registration_failed',
+                    'Failed to register and mark course as completed',
+                    ['status' => 500]
+                );
+            }
+        }
     }
 }
 ?>
