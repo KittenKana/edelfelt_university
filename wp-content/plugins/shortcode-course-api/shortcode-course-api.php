@@ -483,7 +483,7 @@ function registered_courses_shortcode() {
                                             <div class="course-description">${course.description}</div>
                                         </div>
                                         <div style="margin-top: 10px;">
-                                            <button id="mark-comp" class="mark-complete-btn unregister-btn api-btn" data-reg-id="${course.registration_id}">Mark Completed</button>
+                                            <button id="mark-comp" class="mark-complete-btn api-btn" data-reg-id="${course.registration_id}">Mark Completed</button>
                                             <button class="unregister-btn api-btn" data-reg-id="${course.registration_id}">Unregister</button>
                                         </div>
                                     </div>`;
